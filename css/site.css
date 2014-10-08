@@ -7,11 +7,10 @@
 .resume ul { padding-left: 20px; }
 
 .resume .section { margin-bottom: 15px; }
-.resume .section.tight p { margin-bottom: 0px; }
 
-.resume .place { font-weight: bold; }
-.resume .title { font-style: italic; }
-.resume .project { font-weight: bold; }
+.resume .place { font-weight: bold; margin-bottom: 0px; }
+.resume .title { font-style: italic; margin-bottom: 0px; }
+.resume .project { font-weight: bold; margin-bottom: 0px; }
 .resume .date { float: right; }
 
 @media (max-width: 800px) {
