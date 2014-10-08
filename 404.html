@@ -1,0 +1,27 @@
+---
+layout: default
+title: 404 Not Found
+---
+
+<h3>That pages wasn't found!</h3>
+
+<p>Maybe I can help you find what you were looking for:</p>
+
+<fieldset>
+  <legend>Posts</legend>
+  <ul>
+    {% for post in site.posts %}
+
+        {{ post.date | date: "%B %e, %Y" }}
+        <a href="{{ post.url }}">{{ post.title }}</a>
+
+    {% endfor %}
+  </ul>
+</fieldset>
+
+<fieldset>
+  <legend>Menu</legend>
+  <ul>
+    {% include menu.html %}
+  </ul>
+</fieldset>
