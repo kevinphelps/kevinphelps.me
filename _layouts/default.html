@@ -30,22 +30,22 @@
     </div>
   </div>
   <div class="container body-content">
-    <header class="page-header">
-      <h2>
-        Kevin Phelps
-        <br class="visible-xs" />
-        <small>{{ page.title }}</small>
-      </h2>
-    </header>
+    <fieldset>
+      <legend><h2>{{ page.title }}</h2></legend>
 
-    <div class="row">
-      <div class="col-md-9">
-        {{ content }}
+      <div class="row">
+        <div class="col-md-9">
+            {{ content }}
+        </div>
+        <div class="col-md-3">
+          <div id="about-me" class="well hidden-xs hidden-sm">
+            {% include about.html %}
+          </div>
+          <button class="btn btn-default hidden-md hidden-lg form-control"
+            onclick="showAboutMe(this);">Show About Me</button>
+        </div>
       </div>
-      <div class="col-md-3 well">
-        {% include about.html %}
-      </div>
-    </div>
+    </fieldset>
 
     <hr />
     <footer class="page-footer">

@@ -1,6 +1,10 @@
+/******************************* General Styles *******************************/
 .page-header > h2 { margin-bottom: 0px; }
-.body-content { padding-top: 30px; }
+.body-content { padding-top: 70px; }
 .no-margin { margin: 0px; }
+
+/********************************** About Me **********************************/
+#about-me { margin-bottom: 0px; }
 
 /*********************************** Résumé ***********************************/
 .resume legend { margin-bottom: 10px; }
