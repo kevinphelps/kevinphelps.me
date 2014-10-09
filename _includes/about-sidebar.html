@@ -1,0 +1,11 @@
+{% if page.is_home_page %}
+  <div id="about-me" class="well">
+    {% include about.html %}
+  </div>
+{% else %}
+  <div id="about-me" class="well hidden-xs hidden-sm">
+    {% include about.html %}
+  </div>
+  <button class="btn btn-default hidden-md hidden-lg form-control"
+    onclick="showAboutMe(this);">Show About Me</button>
+{% endif %}
