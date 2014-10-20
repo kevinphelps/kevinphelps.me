@@ -20,4 +20,7 @@
   <a target="_blank" href="https://www.linkedin.com/in/kevinphelps11">
     <img src="/images/linkedin-button.png">
   </a>
+  {% if page.url != "/resume.html" && page.url != "/resume" %}
+    <a class="btn btn-default" href="/resume.html">My Résumé</a>
+  {% endif %}
 </p>
