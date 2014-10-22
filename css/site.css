@@ -4,6 +4,7 @@
 .no-margin { margin: 0px; }
 .thumbnail { margin: 5px 10px; }
 .thumbnail[data-fullres-src] { cursor: pointer; cursor: hand; }
+.fullres { padding: 10px; border-radius: 10px; width: 100%; }
 
 /********************************** About Me **********************************/
 #about-me { margin-bottom: 0px; }

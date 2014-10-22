@@ -16,7 +16,7 @@ $(".thumbnail[data-fullres-src]").click(function()
   var $modal = $("<div/>", { "class": "modal fade" }).insertAfter($(this));
   var $modalDialog = $("<div/>", { "class": "modal-dialog" }).appendTo($modal);
   var $modalContent = $("<div/>", { "class": "modal-content" }).appendTo($modalDialog);
-  $("<img/>", { "class": "col-md-12 thumbnail", "src": $(this).attr("data-fullres-src") }).appendTo($modalContent);
+  $("<img/>", { "class": "fullres", "src": $(this).attr("data-fullres-src") }).appendTo($modalContent);
 
   // set event to remove modal
   $modal.on('hidden.bs.modal', function (e) { $modal.remove(); });
