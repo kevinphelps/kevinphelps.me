@@ -2,7 +2,8 @@
 .page-header > h2 { margin-bottom: 0px; }
 .body-content { padding-top: 70px; }
 .no-margin { margin: 0px; }
-.thumbnail { margin: 5px 10px;}
+.thumbnail { margin: 5px 10px; }
+.thumbnail[data-fullres-src] { cursor: pointer; cursor: hand; }
 
 /********************************** About Me **********************************/
 #about-me { margin-bottom: 0px; }
