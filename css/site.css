@@ -5,6 +5,7 @@
 .thumbnail { margin: 5px 10px; }
 .thumbnail[data-fullres-src] { cursor: pointer; cursor: hand; }
 .fullres { padding: 10px; border-radius: 10px; width: 100%; }
+blockquote.normal-size { font-size: 14px; }
 
 /********************************** About Me **********************************/
 #about-me { margin-bottom: 0px; }
@@ -31,6 +32,8 @@
   .body-content { padding-top: 0px; }
   .about-sidebar { display: none; }
   section, .section { page-break-inside: avoid; }
+
+  li { page-break-inside: avoid; }
 
   .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 { float: left; }
   .col-sm-1 { width: 8.333333333333332%; }
