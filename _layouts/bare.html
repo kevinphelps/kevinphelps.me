@@ -9,11 +9,25 @@
   <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css" />
   <link rel="stylesheet" type="text/css" href="/css/site.css" />
 
-  <!-- open graph -->
+  <!-- for Google -->
+  <meta name="description" content="{{ page.description }}" />
+  <meta name="keywords" content="{{ page.keywords }}" />
+  <meta name="author" content="Kevin Phelps" />
+  <meta name="copyright" content="Copyright 2015 Kevin Phelps" />
+
+  <!-- for Facebook -->
   <meta property="og:site_name" content="Kevin Phelps" />
-  <meta property="og:title" content="{{ page.title }}" />
-  <meta property="og:url" content="http://kevinphelps.me{{ page.url }}" />
   <meta property="og:type" content="article" />
+  <meta property="og:url" content="http://kevinphelps.me{{ page.url }}" />
+  <meta property="og:title" content="{{ page.title }}" />
+  <meta property="og:description" content="{{ page.description }}" />
+  <meta property="og:image" content="http://kevinphelps.me{{ page.image }}" />
+
+  <!-- for Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="{{ page.title }}" />
+  <meta name="twitter:description" content="{{ page.description }}" />
+  <meta name="twitter:image" content="http://kevinphelps.me{{ page.image }}" />
 </head>
 
 <body>
