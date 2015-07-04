@@ -10,10 +10,10 @@ function showAboutMe(buttonToRemove)
 }
 
 /********************************* Thumbnails *********************************/
-$(".thumbnail[data-fullres-src]").click(function()
+$("img[data-fullres-src]").click(function()
 {
   // create modal for fullres image
-  var $modal = $("<div/>", { "class": "modal fade" }).insertAfter($(this));
+  var $modal = $("<div/>", { "class": "modal fade full-res-modal" }).insertAfter($(this));
   var $modalDialog = $("<div/>", { "class": "modal-dialog" }).appendTo($modal);
   var $modalContent = $("<div/>", { "class": "modal-content" }).appendTo($modalDialog);
   $("<img/>", { "class": "fullres", "src": $(this).attr("data-fullres-src") }).appendTo($modalContent);
