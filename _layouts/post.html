@@ -2,7 +2,16 @@
 layout: default
 ---
 
-<p><b>{{ page.date | date: "%B %e, %Y" }}</b></p>
+{% if page.description %}
+  <blockquote>
+    <p>{{ page.description }}</p>
+  </blockquote>
+{% endif %}
+
+<p>
+  <b>{{ page.date | date: "%B %e, %Y" }}</b>
+  <i>{{ page.keywords }}</i>
+</p>
 
 {{ content }}
 
