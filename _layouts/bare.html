@@ -5,8 +5,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title }} >> Kevin Phelps</title>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
   <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" type="text/css" href="/css/fontello.css" />
   <link rel="stylesheet" type="text/css" href="/css/site.css" />
 
   <!-- for Google -->
@@ -28,6 +30,57 @@
   <meta name="twitter:title" content="{{ page.title }}" />
   <meta name="twitter:description" content="{{ page.description }}" />
   <meta name="twitter:image" content="http://kevinphelps.me{{ page.image }}" />
+  
+  <!-- for Google -->
+  <script async type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Kevin Phelps",
+      "url": "http://kevinphelps.me",
+      "image": "http://kevinphelps.me/images/profile-pic.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cape Girardeau",
+        "addressRegion": "MO",
+        "addressCountry": "USA"
+      },
+      "gender": "male",
+      "jobTitle": "Web Developer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Vintage Software, LLC.",
+        "telephone: "(573) 475-4627",
+        "address": {
+          "@type":"PostalAddress",
+          "streetAddress": "100 S. High St.",
+          "addressLocality": "Jackson",
+          "addressRegion": "MO",
+          "postalCode": "63755",
+          "addressCountry": "USA"
+        }
+      },
+      "alumniOf": {
+        "@type": "Organization",
+        "name": "Southeast Missouri State University",
+        "telephone: "(573) 651-2000",
+        "address": {
+          "@type":"PostalAddress",
+          "streetAddress": "One University Plaza",
+          "addressLocality": "Cape Girardeau",
+          "addressRegion": "MO",
+          "postalCode": "63701",
+          "addressCountry": "USA"
+        }
+      },
+      "sameAs": [
+        "https://www.facebook.com/kevinphelps11",
+        "https://twitter.com/kevinphelps11",
+        "https://www.linkedin.com/in/kevinphelps11",
+        "https://github.com/kevinphelps"
+      ]
+    }
+  </script>
 </head>
 
 <body>
@@ -43,17 +96,16 @@
       </div>
       <div class="navbar-right navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          {% include menu.html %}
+          <li><a target="_blank" href="https://www.facebook.com/KevinPhelps11"><i class="icon-facebook-squared"></i> Facebook</a></li>
+          <li><a target="_blank" href="https://www.twitter.com/KevinPhelps11"><i class="icon-twitter-squared"></i> Twitter</a></li>
+          <li><a target="_blank" href="https://www.linkedin.com/in/kevinphelps11"><i class="icon-linkedin-squared"></i> LinkedIn</a></li>
+          <li><a target="_blank" href="https://github.com/kevinphelps/"><i class="icon-github-squared"></i> GitHub</a></li>
         </ul>
       </div>
     </div>
   </div>
   <div class="container body-content">
-    <fieldset>
-      <legend><h2>{% if page.header %}{{ page.header}}{% else %}{{ page.title }}{% endif %}</h2></legend>
-
-      {{ content }}
-    </fieldset>
+    {{ content }}
 
     <hr />
     <footer class="page-footer">

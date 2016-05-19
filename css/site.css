@@ -1,17 +1,22 @@
 /******************************* General Styles *******************************/
+body { font-family: 'Montserrat', sans-serif; padding-top: 70px; }
 .page-header > h2 { margin-bottom: 0px; }
-.body-content { padding-top: 70px; }
 .no-margin { margin: 0px; }
-.thumbnail { margin: 5px 10px; }
-.thumbnail[data-fullres-src] { cursor: pointer; cursor: hand; }
 .full-res-modal .modal-dialog { width: 100%; max-width: 90%; }
 .fullres { padding: 10px; border-radius: 10px; width: 100%; }
 
 blockquote.normal-size { font-size: 14px; }
-img.post-banner { width: 100%; border-radius: 5px; }
 
-/********************************** About Me **********************************/
-#about-me { margin-bottom: 0px; }
+/*********************************** Navbar ***********************************/
+.navbar-brand { font-size: 20px; }
+.navbar-nav { font-size: 18px; }
+.navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-brand { color: white; }
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-brand:hover { color: #777; }
+
+/*********************************** Images ***********************************/
+img.post-banner { width: 100%; border-radius: 5px; }
+img.rounded { border-radius: 5px; }
+img.center {margin:0 auto;}
 
 /*********************************** Résumé ***********************************/
 .resume legend { margin-bottom: 10px; }
