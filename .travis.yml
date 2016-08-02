@@ -1,7 +1,11 @@
-language: ruby
+language: node_js
+node_js:
+ - "4.1"
 sudo: false
 rvm:
  - 2.2.4
+install:
+ - npm install -g firebase-tools
 script:
  - bundle exec jekyll build
  - firebase deploy --token ${FirebaseToken}
