@@ -3,7 +3,7 @@
     "public": "_site",
     "rewrites": [
       {
-        "source": "**",
+        "source": "/resume.html",
         "destination": "/index.html"
       }
     ]
