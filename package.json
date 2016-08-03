@@ -1,0 +1,21 @@
+{
+  "name": "kevinphelps.me",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist\\index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "bundle exec jekyll build --source src --destination dist",
+    "serve": "bundle exec jekyll serve --source src --destination dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinphelps/kevinphelps.me.git"
+  },
+  "author": "Kevin Phelps",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/kevinphelps/kevinphelps.me/issues"
+  },
+  "homepage": "https://github.com/kevinphelps/kevinphelps.me#readme"
+}
