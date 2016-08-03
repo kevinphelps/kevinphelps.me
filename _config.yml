@@ -1,4 +1,3 @@
 markdown: rdiscount
 gems:
   - jekyll-sitemap
-  - jekyll-redirect-from
