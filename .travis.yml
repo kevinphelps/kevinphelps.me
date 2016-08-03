@@ -6,5 +6,5 @@ install:
  - bundle install
  - npm install -g firebase-tools
 script:
- - bundle exec jekyll build
+ - npm run build
  - firebase deploy --token "${FIREBASE_TOKEN}"
