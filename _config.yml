@@ -1,3 +1,11 @@
 markdown: rdiscount
 gems:
   - jekyll-sitemap
+exclude:
+  - firebase.json
+  - Gemfile
+  - Gemfile.lock
+compress_html:
+  clippings: all
+  comments:  ["<!-- ", " -->"]
+  endings:   all

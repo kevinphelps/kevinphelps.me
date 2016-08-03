@@ -1,3 +1,7 @@
+---
+layout: compress
+---
+
 <!DOCTYPE html>
 <html>
 
@@ -5,11 +9,20 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title }}</title>
-  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css" />
-  <link rel="stylesheet" type="text/css" href="/css/fontello.css" />
-  <link rel="stylesheet" type="text/css" href="/css/site.css" />
+
+  {% css_asset_tag lib %}
+  - /_assets/vendor/css/bootstrap-3.3.7.css
+  - /_assets/vendor/css/bootstrap-theme-3.3.7.css
+  - /_assets/vendor/css/fontello.css
+  {% endcss_asset_tag %}
+    
+  {% css_asset_tag site %}
+  - /_assets/css/site.css
+  {% endcss_asset_tag %}
+
+  <noscript id="deferred-styles">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css' />
+  </noscript>
 
   <!-- for Google -->
   <meta name="description" content="{{ page.description }}" />
@@ -30,7 +43,7 @@
   <meta name="twitter:title" content="{{ page.title }}" />
   <meta name="twitter:description" content="{{ page.description }}" />
   <meta name="twitter:image" content="http://kevinphelps.me{{ page.image }}" />
-  
+
   <!-- for Google -->
   <script async type="application/ld+json">
     {
@@ -114,17 +127,12 @@
     </footer>
   </div>
 
-  <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="/js/site.js"></script>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-55533853-1', 'auto');
-    ga('send', 'pageview');
-  </script>
+  {% javascript_asset_tag lib %}
+  - /_assets/vendor/js/jquery-3.1.0.js
+  - /_assets/vendor/js/bootstrap-3.3.7.js
+  {% endjavascript_asset_tag %}
+  {% javascript_asset_tag site %}
+  - /_assets/js/site.js
+  {% endjavascript_asset_tag %}
 </body>
 </html>
