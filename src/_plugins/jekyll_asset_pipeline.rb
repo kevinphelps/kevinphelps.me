@@ -2,6 +2,7 @@ require 'jekyll_asset_pipeline'
 
 module JekyllAssetPipeline
   class CssCompressor < JekyllAssetPipeline::Compressor
+    require 'date'
     require 'cssminify'
 
     def self.filetype

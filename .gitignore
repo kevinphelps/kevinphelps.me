@@ -1,4 +1,6 @@
 dist/
 .sass-cache/
+node_modules/
+temp/
 Gemfile.lock
 *.db

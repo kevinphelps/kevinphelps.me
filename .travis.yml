@@ -4,6 +4,7 @@ rvm:
  - 2.2
 install:
  - bundle install
+ - npm install
  - npm install -g firebase-tools
 script:
  - npm run build

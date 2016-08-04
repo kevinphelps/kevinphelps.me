@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "bundle exec jekyll build --source src --destination dist",
-    "serve": "bundle exec jekyll serve --source src --destination dist"
+    "serve": "bundle exec jekyll serve --source src --destination dist",
+    "clean": "if exist dist rmdir dist /q /s && if exist temp rmdir temp /q /s"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/kevinphelps/kevinphelps.me/issues"
   },
-  "homepage": "https://github.com/kevinphelps/kevinphelps.me#readme"
+  "homepage": "https://github.com/kevinphelps/kevinphelps.me#readme",
+  "devDependencies": {
+    "uncss": "^0.14.1"
+  }
 }
