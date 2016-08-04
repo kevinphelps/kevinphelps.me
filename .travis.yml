@@ -1,8 +1,7 @@
-language: ruby
+language: generic
 sudo: false
-rvm:
- - 2.2
 before_install:
+ - rvm install 2.2
  - nvm install 4.1
 install:
  - bundle install
