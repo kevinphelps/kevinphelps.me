@@ -14,7 +14,7 @@ for (let i = 0; i < assetFiles.length; i++) {
 function processFile(cssFile) {
     glob('dist/**/*.html', (err, files) => {
         if (err) {
-            console.log(err)
+            throw err;
         }
 
         var options = {
@@ -36,10 +36,11 @@ function processFile(cssFile) {
 
         uncss(files, options, (err, output) => {
             if (err) {
-            console.log(err)
+                throw err;
             }
 
-            fs.writeFileSync(`dist/assets/${cssFile}`, output)
-        })
+            fs.writeFileSync(`dist/assets/${cssFile}`, output);
+            console.log(`uncss: processed dist/assets/${cssFile}`);
+        });
     });
 }

@@ -5,6 +5,7 @@
   "main": "dist\\index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "node node_modules/eslint/bin/eslint.js src/build_scripts/uncss.js",
     "build": "bundle exec jekyll build --source src --destination dist",
     "serve": "bundle exec jekyll serve --source src --destination dist",
     "clean": "if exist dist rmdir dist /q /s && if exist temp rmdir temp /q /s"
