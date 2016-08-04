@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/kevinphelps/kevinphelps.me#readme",
   "devDependencies": {
+    "eslint": "^3.2.2",
     "uncss": "^0.14.1"
   }
 }
