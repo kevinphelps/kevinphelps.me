@@ -1,13 +1,15 @@
 'use strict';
 
-let uncss = require('uncss');
-let glob = require('glob');
-let fs = require('fs');
+const uncss = require('uncss');
+const glob = require('glob');
+const fs = require('fs');
 
-let assetFiles = fs.readdirSync('dist/assets');
-for (let i = 0; i < assetFiles.length; i++) {
-    if (/\.css$/.test(assetFiles[i])) {
-        processFile(assetFiles[i]);
+if (process.platform != 'win32') {
+    let assetFiles = fs.readdirSync('dist/assets');
+    for (let i = 0; i < assetFiles.length; i++) {
+        if (/\.css$/.test(assetFiles[i])) {
+            processFile(assetFiles[i]);
+        }
     }
 }
 
