@@ -955,6 +955,10 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
+bootstrap@3.3.7:
+  version "3.3.7"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
+
 boxen@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boxen/-/boxen-1.0.0.tgz#b2694baf1f605f708ff0177c12193b22f29aaaab"
@@ -3811,6 +3815,10 @@ normalize-url@^1.4.0:
     prepend-http "^1.0.0"
     query-string "^4.1.0"
     sort-keys "^1.0.0"
+
+normalize.css@6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-6.0.0.tgz#22188c2707c911fb3ad3c1aac0677ff68661bea8"
 
 npm-run-path@^1.0.0:
   version "1.0.0"

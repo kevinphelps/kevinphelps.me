@@ -1,1 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~normalize.css/normalize';
+@import '~bootstrap/dist/css/bootstrap.css';
+@import './styles/_typography';
+@import './styles/_layout';
+@import './styles/_images';
