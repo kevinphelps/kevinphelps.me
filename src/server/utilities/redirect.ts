@@ -3,8 +3,8 @@ import * as express from 'express';
 import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
 
 export function handleRedirectOr404(req: express.Request, res: express.Response, next: express.NextFunction, expectedUrl: Observable<string>) {
   return expectedUrl
