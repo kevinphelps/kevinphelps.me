@@ -1,10 +1,10 @@
-import { Kevinphelps.MePage } from './app.po';
+import { HomePage } from './app.po';
 
-describe('kevinphelps.me App', () => {
-  let page: Kevinphelps.MePage;
+describe('home page', () => {
+  let page: HomePage;
 
   beforeEach(() => {
-    page = new Kevinphelps.MePage();
+    page = new HomePage();
   });
 
   it('should display message saying app works', () => {
