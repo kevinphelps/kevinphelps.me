@@ -4,5 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  serverPort: typeof window === 'undefined' ? process.env.PORT || 5000 : undefined,
+  api: typeof window === 'undefined' ? 'http://localhost:1114/api' : '/api',
 };
