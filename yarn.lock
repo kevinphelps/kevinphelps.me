@@ -2073,7 +2073,7 @@ express-logging@1.1.1:
   dependencies:
     on-headers "^1.0.0"
 
-express@4.15.2, express@^4.0.0, express@^4.13.3:
+express@4.15.2, express@^4.13.3:
   version "4.15.2"
   resolved "https://registry.yarnpkg.com/express/-/express-4.15.2.tgz#af107fc148504457f2dca9a6f2571d7129b97b35"
   dependencies:
@@ -4626,7 +4626,7 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
-reflect-metadata@^0.1.0, reflect-metadata@^0.1.2:
+reflect-metadata@^0.1.2:
   version "0.1.10"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.10.tgz#b4f83704416acad89988c9b15635d47e03b9344a"
 
@@ -4815,19 +4815,11 @@ run-async@^2.2.0:
   dependencies:
     is-promise "^2.1.0"
 
-rx-routes@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/rx-routes/-/rx-routes-0.1.1.tgz#eb3d7603e452f71de396272713ce35996196d2ec"
-  dependencies:
-    express "^4.0.0"
-    reflect-metadata "^0.1.0"
-    rxjs "^5.0.0"
-
 rx@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
 
-rxjs@5.1.0, rxjs@^5.0.0, rxjs@^5.0.1:
+rxjs@5.1.0, rxjs@^5.0.1:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.1.0.tgz#0aa9018b7f440b505fa42bd742b6738be550e720"
   dependencies:
