@@ -20,6 +20,12 @@ export class BlogApiController {
     const urlSlug = request.params['urlSlug'];
 
     return this.blog.readBlogEntry(date, urlSlug)
-      .do(blogEntry => { response.json(blogEntry ? blogEntry : { message: `Blog entry not found at ${date}/${urlSlug}.` }); });
+      .do(blogEntry => {
+        if (blogEntry) {
+          response.json(blogEntry);
+        } else {
+          response.status(404).json({ message: `Blog entry not found at ${date}/${urlSlug}.` });
+        }
+      });
   }
 }

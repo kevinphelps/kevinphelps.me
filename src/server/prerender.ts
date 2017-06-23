@@ -28,6 +28,7 @@ const sitePath = './dist/static-site';
 
   const staticUrls = [
     '/',
+    '/404',
     '/resume'
   ];
 

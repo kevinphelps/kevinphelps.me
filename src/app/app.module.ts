@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BlogEntryComponent } from './blog-entry/blog-entry.component';
 import { BlogListComponent } from './blog-list/blog-list.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { ProfileHeaderComponent } from './profile-header/profile-header.component';
 import { ResumeComponent } from './resume/resume.component';
 import { BlogApiService } from './shared/services/blog-api.service';
@@ -16,6 +17,7 @@ import { BlogApiService } from './shared/services/blog-api.service';
     AppComponent,
     BlogEntryComponent,
     BlogListComponent,
+    NotFoundComponent,
     ProfileHeaderComponent,
     ResumeComponent
   ],

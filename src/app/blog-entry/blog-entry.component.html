@@ -1,4 +1,4 @@
-<ng-container *ngIf="blogEntry | async; let blogEntry">
+<ng-container *ngIf="blogEntry | async; let blogEntry; else notFound">
   <p>
     <b>Kevin Phelps, {{ blogEntry.date | date }}</b>
   </p>
@@ -9,3 +9,7 @@
 
   <div [innerHTML]="blogEntry.body"></div>
 </ng-container>
+
+<ng-template #notFound>
+  <app-not-found></app-not-found>
+</ng-template>
