@@ -12,8 +12,7 @@ export class BlogService {
 
   getBlogList() {
     return this.http.get(`${environment.api}/blog`)
-      .map(response => response.json() as string[])
-      .mergeMap(filenames => Observable.forkJoin(filenames.map(filename => this.getBlogEntryByFilename(filename))));
+      .map(response => response.json() as BlogEntry[]);
   }
 
   getBlogEntry(date: string, urlSlug: string) {
@@ -38,14 +37,14 @@ export class BlogService {
     return { date, urlSlug };
   }
 
-  private static parseBlogFileContents(filename: string, fileContents: string) {
+  static parseBlogFileContents(filename: string, fileContents: string, setBody = true) {
     const parsedFilename = BlogService.parseBlogFilename(filename);
     const fileContentsMatch = /^---((?:.|\r|\n)+)---((?:.|\r|\n)+)$/g.exec(fileContents);
 
     const date = parsedFilename.date;
     const url = `/blog/${date}/${parsedFilename.urlSlug}`;
     const metadata: BlogEntryMetadata = parseYaml(fileContentsMatch[1].trim());
-    const body = fileContentsMatch[2].trim();
+    const body = setBody ? fileContentsMatch[2].trim() : undefined;
 
     return { date, url, body, ...metadata } as BlogEntry;
   }

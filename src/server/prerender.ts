@@ -9,7 +9,7 @@ import { extension as mimeExtension } from 'mime';
 import { dirname, join as joinPaths, normalize as normalizePath } from 'path';
 import { Observable } from 'rxjs/Observable';
 
-import { BlogService } from './../app/shared/services/blog.service';
+import { BlogEntry } from './../app/shared/interfaces/blog';
 import { environment } from './../environments/environment';
 import { AppExpressModule } from './app-express.module';
 import { getInjector } from './utilities/get-injector';
@@ -47,10 +47,8 @@ const clientPath = './dist/client';
       .do(response => { save(response); });
 
     const prerenderBlog = httpGet(`${baseUrl}/api/blog`)
-      .map(response => response.json() as string[])
-      .mergeMap(filenames => Observable.from(filenames))
-      .map(filename => BlogService.parseBlogFilename(filename))
-      .mergeMap(filename => httpGet(`${baseUrl}/blog/${filename.date}/${filename.urlSlug}`))
+      .mergeMap(response => Observable.from(response.json() as BlogEntry[]))
+      .mergeMap(blogEntry => httpGet(`${baseUrl}${blogEntry.url}`))
       .do(response => { save(response); });
 
     Observable.forkJoin(prerenderPages, prerenderBlog)
