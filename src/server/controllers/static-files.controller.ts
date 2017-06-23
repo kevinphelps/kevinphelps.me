@@ -2,8 +2,6 @@ import { static as expressStatic, Handler, NextFunction, Request, Response } fro
 import { Controller, Get } from 'rx-routes';
 import { ServeStaticOptions } from 'serve-static';
 
-import { FileCacheService } from './../services/file-cache.service';
-
 const staticOptions: ServeStaticOptions = {
   redirect: false,
   maxAge: '1y',
@@ -16,11 +14,9 @@ const staticOptions: ServeStaticOptions = {
 
 @Controller('/')
 export class StaticFilesController {
-  private readonly indexHtml: string;
   private readonly staticFileHandler: Handler;
 
-  constructor(fileCache: FileCacheService) {
-    this.indexHtml = fileCache.getFile('./dist/client/index.html');
+  constructor() {
     this.staticFileHandler = expressStatic('./dist/client', staticOptions);
   }
 
