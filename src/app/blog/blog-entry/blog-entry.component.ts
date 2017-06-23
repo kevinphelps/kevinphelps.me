@@ -18,12 +18,15 @@ interface BlogEntryRouteParams {
 export class BlogEntryComponent implements OnInit {
   readonly blogEntry: Observable<BlogEntry>;
 
+  notFound = false;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private blog: BlogService) {
 
     this.blogEntry = this.activatedRoute.params
-      .switchMap((params: BlogEntryRouteParams) => this.blog.getBlogEntry(params.date, params.urlSlug))
+      .mergeMap((params: BlogEntryRouteParams) => this.blog.getBlogEntry(params.date, params.urlSlug))
+      .do(blogEntry => { this.notFound = blogEntry === undefined; })
       .shareReplay(1);
   }
 

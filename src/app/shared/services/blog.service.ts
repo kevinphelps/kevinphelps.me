@@ -25,7 +25,8 @@ export class BlogService {
   private getBlogEntryByFilename(filename: string) {
     return this.http.get(`${environment.serverRoot}/blog/${filename}`)
       .map(response => response.text())
-      .map(fileContents => BlogService.parseBlogFileContents(filename, fileContents));
+      .map(fileContents => BlogService.parseBlogFileContents(filename, fileContents))
+      .catch(error => error.status === 404 ? Observable.of<BlogEntry>(undefined) : Observable.throw(error));
   }
 
   static parseBlogFilename(filename: string) {

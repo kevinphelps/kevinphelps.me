@@ -4,6 +4,7 @@ import { Response } from 'express';
 import { Observable } from 'rxjs/Observable';
 
 import { minifyHtml } from '../utilities/html-minify';
+import { pageNotFoundTitle } from './../../app/shared/constants';
 import { AppServerModule } from './../app-server.module';
 import { FileCacheService } from './file-cache.service';
 
@@ -26,7 +27,10 @@ export class ServerRenderService {
 
   private sendResponse(html: string, response: Response) {
     if (response) {
-      response.status(200).type('html').send(html);
+      const is404 = html.includes(`<title>${pageNotFoundTitle}</title>`);
+      const status = is404 ? 404 : 200;
+
+      response.status(status).type('html').send(html);
     }
   }
 }

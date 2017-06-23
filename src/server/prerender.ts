@@ -43,18 +43,23 @@ const clientPath = './dist/client';
 
   function prerender() {
     const prerenderPages = Observable.from(staticUrls)
-      .mergeMap(url => http.get(`${baseUrl}${url}`))
+      .mergeMap(url => httpGet(`${baseUrl}${url}`))
       .do(response => { save(response); });
 
-    const prerenderBlog = http.get(`${baseUrl}/api/blog`)
+    const prerenderBlog = httpGet(`${baseUrl}/api/blog`)
       .map(response => response.json() as string[])
       .mergeMap(filenames => Observable.from(filenames))
       .map(filename => BlogService.parseBlogFilename(filename))
-      .mergeMap(filename => http.get(`${baseUrl}/blog/${filename.date}/${filename.urlSlug}`))
+      .mergeMap(filename => httpGet(`${baseUrl}/blog/${filename.date}/${filename.urlSlug}`))
       .do(response => { save(response); });
 
     Observable.forkJoin(prerenderPages, prerenderBlog)
       .subscribe(() => { }, error => { exit(error); }, () => { exit(); });
+  }
+
+  function httpGet(url: string) {
+    return http.get(url)
+      .catch((response: Response) => response.status === 404 && url.includes('404') ? Observable.of(response) : Observable.throw(response));
   }
 
   function save(response: Response) {
