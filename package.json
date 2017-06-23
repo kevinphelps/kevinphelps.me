@@ -7,6 +7,7 @@
     "start": "nodemon dist/server/server.js",
     "test": "ng test --watch=false --code-coverage",
     "prerender": "node dist/server/prerender.js",
+    "deploy": "yarn run build--full && firebase deploy",
     "clean": "rimraf dist",
     "lint": "ng lint --type-check",
     "watch": "parallelshell \"npm run client:watch\" \"npm run server:watch\"",
