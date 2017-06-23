@@ -1,28 +1,44 @@
 import 'reflect-metadata';
 import 'zone.js/dist/zone-node';
-
-import * as bodyParser from 'body-parser';
-import * as express from 'express';
-import * as expressLogging from 'express-logging';
-import * as http from 'http';
-import * as logops from 'logops';
+import './../rxjs-operators';
 
 import { enableProdMode } from '@angular/core';
+import * as compression from 'compression';
+import * as express from 'express';
+import * as expressLogging from 'express-logging';
+import { createServer } from 'http';
+import * as logops from 'logops';
+import { registerController } from 'rx-routes';
 
-import { environment } from '../environments/environment';
-import { serverRenderHandler } from './handlers/server-render.handler';
-import { indexFallbackHandler, staticFilesHandler } from './handlers/static-files.handler';
+import { environment } from './../environments/environment';
+import { AppExpressModule } from './app-express.module';
+import { ServerRenderController } from './controllers/server-render.controller';
+import { StaticFilesController } from './controllers/static-files.controller';
+import { getInjector } from './utilities/get-injector';
+import { handleRequestError } from './utilities/handle-request-error';
 
-enableProdMode();
+(async function () {
+  enableProdMode();
 
-const app = express();
-const server = http.createServer(app);
+  const injector = await getInjector(AppExpressModule);
+  const staticFilesController = injector.get(StaticFilesController);
+  const serverRenderController = injector.get(ServerRenderController);
 
-app.use(expressLogging(logops));
-app.use(bodyParser.json());
+  const app = express();
+  const server = createServer(app);
 
-app.use(serverRenderHandler);
-app.use(staticFilesHandler);
-app.use(indexFallbackHandler);
+  app.use(compression());
 
-server.listen(environment.serverPort, () => { console.log(`listening on port ${environment.serverPort}`); });
+  app.use(expressLogging(logops));
+
+  registerController(app, staticFilesController, handleRequestError);
+  registerController(app, serverRenderController, handleRequestError);
+
+  server.listen(environment.serverPort, () => {
+    console.log(`listening on port ${environment.serverPort}`);
+
+    if (process.send) {
+      process.send('listening');
+    }
+  });
+})();
