@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { BlogEntry } from './../shared/interfaces/blog';
-import { BlogService } from './../shared/services/blog.service';
+import { BlogEntry } from './../../shared/interfaces/blog';
+import { BlogService } from './../../shared/services/blog.service';
 
 @Component({
   selector: 'app-blog-list',
