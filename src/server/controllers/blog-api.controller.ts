@@ -1,31 +1,18 @@
 import { Request, Response } from 'express';
 import { Controller, Get } from 'rx-routes';
 
-import { BlogService } from './../services/blog.service';
+import { FsService } from './../services/fs.service';
+
+const blogPath = './src/blog';
 
 @Controller('/api/blog')
 export class BlogApiController {
-  constructor(private blog: BlogService) {
+  constructor(private fs: FsService) {
   }
 
   @Get('')
   getBlogEntries(_request: Request, response: Response) {
-    return this.blog.readBlogEntries()
-      .do(blogEntries => { response.json(blogEntries); });
-  }
-
-  @Get('/:date/:urlSlug')
-  getBlogEntry(request: Request, response: Response) {
-    const date = request.params['date'];
-    const urlSlug = request.params['urlSlug'];
-
-    return this.blog.readBlogEntry(date, urlSlug)
-      .do(blogEntry => {
-        if (blogEntry) {
-          response.json(blogEntry);
-        } else {
-          response.status(404).json({ message: `Blog entry not found at ${date}/${urlSlug}.` });
-        }
-      });
+    return this.fs.readDirectory(blogPath)
+      .do(filenames => { response.json(filenames); });
   }
 }

@@ -10,7 +10,7 @@ import { BlogListComponent } from './blog-list/blog-list.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ProfileHeaderComponent } from './profile-header/profile-header.component';
 import { ResumeComponent } from './resume/resume.component';
-import { BlogApiService } from './shared/services/blog-api.service';
+import { BlogService } from './shared/services/blog.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { BlogApiService } from './shared/services/blog-api.service';
     AppRoutingModule
   ],
   providers: [
-    BlogApiService
+    BlogService
   ],
   bootstrap: [AppComponent]
 })

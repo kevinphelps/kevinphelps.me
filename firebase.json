@@ -1,7 +1,13 @@
 {
   "hosting": {
-    "public": "dist/static-site",
+    "public": "dist/client",
     "cleanUrls": true,
-    "trailingSlash": false
+    "trailingSlash": false,
+    "rewrites": [
+      {
+        "source": "/api/blog",
+        "destination": "/api/blog.json"
+      }
+    ]
   }
 }

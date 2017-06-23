@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { BlogEntry } from './../shared/interfaces/blog';
-import { BlogApiService } from './../shared/services/blog-api.service';
+import { BlogService } from './../shared/services/blog.service';
 
 @Component({
   selector: 'app-blog-list',
@@ -12,7 +12,7 @@ import { BlogApiService } from './../shared/services/blog-api.service';
 export class BlogListComponent implements OnInit {
   readonly blogEntries: Observable<BlogEntry[]>;
 
-  constructor(private blog: BlogApiService) {
+  constructor(private blog: BlogService) {
     this.blogEntries = this.blog.getBlogEntries().shareReplay(1);
   }
 

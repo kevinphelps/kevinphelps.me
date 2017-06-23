@@ -5,35 +5,29 @@ import './../rxjs-operators';
 import { Http, Response } from '@angular/http';
 import { fork } from 'child_process';
 import { existsSync, mkdirSync, statSync, writeFileSync } from 'fs';
+import { extension as mimeExtension } from 'mime';
 import { dirname, join as joinPaths, normalize as normalizePath } from 'path';
-import { sync as rimrafSync } from 'rimraf';
 import { Observable } from 'rxjs/Observable';
 
-const copy = require('copy');
-
+import { BlogService } from './../app/shared/services/blog.service';
 import { environment } from './../environments/environment';
 import { AppExpressModule } from './app-express.module';
-import { BlogService } from './services/blog.service';
 import { getInjector } from './utilities/get-injector';
 
 const clientPath = './dist/client';
-const sitePath = './dist/static-site';
 
 (async function () {
   const injector = await getInjector(AppExpressModule);
   const http = injector.get(Http);
-  const blogService = injector.get(BlogService);
 
   const baseUrl = `http://localhost:${environment.serverPort}`;
 
   const staticUrls = [
     '/',
     '/404',
-    '/resume'
+    '/resume',
+    '/api/blog'
   ];
-
-  const blogUrls = blogService.readBlogEntries()
-    .map(blogEntries => blogEntries.map(blogEntry => blogEntry.url));
 
   const serverProcess = fork('./dist/server/server.js');
 
@@ -48,24 +42,28 @@ const sitePath = './dist/static-site';
   });
 
   function prerender() {
-    rimrafSync(sitePath);
-
     const prerenderPages = Observable.from(staticUrls)
-      .merge(blogUrls.mergeMap(urls => Observable.from(urls)))
       .mergeMap(url => http.get(`${baseUrl}${url}`))
       .do(response => { save(response); });
 
-    Observable.forkJoin(copyAssets(), prerenderPages)
+    const prerenderBlog = http.get(`${baseUrl}/api/blog`)
+      .map(response => response.json() as string[])
+      .mergeMap(filenames => Observable.from(filenames))
+      .map(filename => BlogService.parseBlogFilename(filename))
+      .mergeMap(filename => http.get(`${baseUrl}/blog/${filename.date}/${filename.urlSlug}`))
+      .do(response => { save(response); });
+
+    Observable.forkJoin(prerenderPages, prerenderBlog)
       .subscribe(() => { }, error => { exit(error); }, () => { exit(); });
   }
 
   function save(response: Response) {
+    const extension = mimeExtension(response.headers.get('Content-Type'));
     const url = response.url.replace(baseUrl, '');
-    const urlWithFilename = url.endsWith('/') ? joinPaths(url, 'index.html') : `${url}.html`;
-    const filePath = joinPaths(sitePath, urlWithFilename);
+    const urlWithFilename = url.endsWith('/') ? joinPaths(url, `index.${extension}`) : `${url}.${extension}`;
+    const filePath = joinPaths(clientPath, urlWithFilename);
 
-    const contents = response.text()
-      .replace(/<script.+?><\/script>/g, '');
+    const contents = response.text();
 
     writeFile(filePath, contents);
   }
@@ -86,27 +84,6 @@ const sitePath = './dist/static-site';
       ensureDirectoryExistence(dirPath);
       mkdirSync(dirPath);
     }
-  }
-
-  function copyAssets() {
-    return Observable.forkJoin(
-      copyFiles(`*.ico`),
-      copyFiles(`*.css`),
-      copyFiles(`glyphicons-*.*`),
-      copyFiles(`assets/**/*.*`, 'assets'));
-  }
-
-  function copyFiles(globPath: string, destination = '') {
-    return new Observable<string[]>(observer => {
-      copy(joinPaths(clientPath, globPath), joinPaths(sitePath, destination), (error: Error, files: string[]) => {
-        if (error) {
-          observer.error(error);
-        } else {
-          observer.next(files);
-          observer.complete();
-        }
-      });
-    });
   }
 
   function exit(error?: any) {

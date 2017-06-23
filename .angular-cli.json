@@ -9,6 +9,7 @@
       "outDir": "dist/client",
       "assets": [
         "assets",
+        "blog",
         "favicon.ico"
       ],
       "index": "index.html",

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { BlogEntry } from './../shared/interfaces/blog';
-import { BlogApiService } from './../shared/services/blog-api.service';
+import { BlogService } from './../shared/services/blog.service';
 
 interface BlogEntryRouteParams {
   date: string;
@@ -20,10 +20,10 @@ export class BlogEntryComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private blog: BlogApiService) {
+    private blog: BlogService) {
 
     this.blogEntry = this.activatedRoute.params
-      .mergeMap((params: BlogEntryRouteParams) => this.blog.getBlogEntry(params.date, params.urlSlug))
+      .switchMap((params: BlogEntryRouteParams) => this.blog.getBlogEntry(params.date, params.urlSlug))
       .shareReplay(1);
   }
 
