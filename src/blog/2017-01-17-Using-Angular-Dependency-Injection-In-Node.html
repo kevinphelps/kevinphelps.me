@@ -1,0 +1,174 @@
+---
+title: Using Angular Dependency Injection In Node
+description: Angular's dependency injection system can be used to manage dependencies in any Javascript application. As an example, I will
+  demonstrate how to use it in a generic Node application.
+---
+
+<h3>Brief Introduction to Dependency Injection in Angular</h3>
+
+<p>
+  Angular's dependency injection system is core to the framework. Is is used to expose framework services to the running application and to
+  inject an application's services into its own components and services.
+</p>
+
+<p>
+  In an Angular app, this happens more or less behind the scenes. The programer only needs to 1) add the <code>@Injectable</code> decorator
+  to classes and 2) import modules and declare providers when creating the <code>NgModule</code>.
+</p>
+
+<pre>
+  <code class="language-ts">
+@NgModule({
+  declarations: [
+    AppComponent,
+    ...
+  ],
+  imports: [
+    HttpModule,
+    ...
+  ],
+  providers: [
+    AuthenticationService,
+    WidgetService,
+    { provide: ErrorService: use: SomeErrorService }
+  ],
+  entryComponents: [AppComponent],
+  bootstrap: [AppComponent],
+})
+export class AppModule { }
+  </code>
+</pre>
+
+<p>
+  Each <code>NgModule</code> holds an injector instance and uses it to instantiate whatever components it needs to render the application.
+  But before a component can be instantiated, its dependencies, whether they are framework services like <code>Http</code>, services
+  defined by the application itself, or services from third-party libraries, must be resolved (including dependencies of dependencies and
+  so on).
+</p>
+
+<blockquote>
+  This is beauty of dependency injection: it allows for seamless access to framework services <i>and</i> seamless code re-use within the
+  application itself.
+</blockquote>
+
+<h3>Using Angular's Dependency Injection in Node</h3>
+
+<p>
+  Because Angular is designed to be a modular system, we can import
+  <a target="_blank" href="https://angular.io/docs/ts/latest/api/core/index/ReflectiveInjector-class.html">RelectiveInjector</a>
+  form the <code>@angular/core</code> project in order to use the Angular dependency injection system to manage dependencies in any
+  Javascript application. As an example, I will demonstrate how to use it in a generic Node application.
+</p>
+
+<p>
+  <b>Required project dependencies:</b>
+  @angular/core, reflect-metadata, and rxjs (not used directly, but required by @angular/core).<br />
+  (Run <code>yarn add @angular/core reflect-metadata rxjs</code> or <code>npm install --save-dev @angular/core reflect-metadata rxjs</code>.)
+</p>
+
+<p>
+  First, we <b>define our services</b>. For this example, I will define two services: <code>ApiService</code> and <code>WidgetService</code>.
+  The <code>WidgetService</code> will require an instance of (i.e. be dependent on) <code>ApiService</code>.
+</p>
+
+<pre>
+  <code class="language-ts">
+// api.service.ts
+
+import { Injectable } from '@angular/core';
+
+const data = {
+  'widgets': [
+    { 'id': 1, 'name': 'Toy Car' },
+    ...
+  ]
+};
+
+@Injectable()
+export class ApiService {
+  constructor() {
+  }
+
+  get(path: string): any[] {
+    return data[path];
+  }
+}
+
+// widget.service.ts
+
+import { Injectable } from '@angular/core';
+
+import { ApiService } from './api.service';
+
+@Injectable()
+export class WidgetService {
+  constructor(private api: ApiService) {
+  }
+
+  get(): any[] {
+    return this.api.get('widgets');
+  }
+}
+  </code>
+</pre>
+
+<p>
+  Next, we will define our providers. I usually do this in a separate file for code organiziation purposes be that's not required. At
+  minumum, the <code>providers</code> array contains a list of classes that can be instantiatied by the injector. Refer to the
+  <a target="_blank" href="https://angular.io/docs/ts/latest/guide/dependency-injection.html#!#injector-providers">docs</a>
+  for other providers you can use. Note that all dependencies of any included provider must also be "provided."
+</p>
+
+<pre>
+  <code class="language-ts">
+// providers.ts
+
+import { ApiService } from './services/api.service';
+import { WidgetService } from './services/widget.service';
+
+export const providers = [
+  ApiService,
+  WidgetService
+];
+  </code>
+</pre>
+
+<p>
+  And finally, we will create an use the injector.
+</p>
+
+<pre>
+  <code class="language-ts">
+// index.ts
+
+import 'reflect-metadata';
+
+import { ReflectiveInjector } from '@angular/core';
+
+import { providers } from './providers';
+import { WidgetService } from './services/widget.service';
+
+const injector = ReflectiveInjector.resolveAndCreate(providers);
+const widgets: WidgetService = injector.get(WidgetService);
+
+console.log(widgets.get());
+  </code>
+</pre>
+
+<p>
+  The magic happens when we call <code>injector.get(WidgetService)</code>. The injector handles resolving and instantiating dependencies
+  for us and just gives us the instance we requested. In this example, the injector first instantiates an <code>ApiService</code> and then
+  uses it to instantiate a <code>WidgetService</code>.
+</p>
+
+<p>
+  This is an extemely simple example of a very powerful tool. This technique can be used in a relatively complex
+  <a target="_blank" href="http://expressjs.com/">Express</a> server
+  or to share services between an Angular app running in an
+  <a target="_blank" href="http://electron.atom.io/">Electron</a> app
+  and a companion CLI interface. I have done both, and it has worked extremely well.
+</p>
+
+<p>
+  <a target="_blank" href="https://github.com/kevinphelps/blog-companion-projects/tree/master/using-angular-dependency-injection-in-node">Full code sample on GitHub</a>
+</p>
