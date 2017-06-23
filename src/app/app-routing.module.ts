@@ -10,10 +10,10 @@ export const routes: Routes = [
   {
     path: '', component: ProfileHeaderComponent, children: [
       { path: '', component: BlogListComponent },
-      { path: 'resume', component: ResumeComponent },
-      { path: 'blog/:date/:urlSlug', component: BlogEntryComponent }
+      { path: 'resume', component: ResumeComponent }
     ]
-  }
+  },
+  { path: 'blog/:date/:urlSlug', component: BlogEntryComponent }
 ];
 
 @NgModule({
