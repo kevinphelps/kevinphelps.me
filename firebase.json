@@ -1,0 +1,7 @@
+{
+  "hosting": {
+    "public": "dist/static-site",
+    "cleanUrls": true,
+    "trailingSlash": false
+  }
+}

@@ -8,7 +8,8 @@ export const commonConfig = {
     webpackNodeExternals()
   ],
   entry: {
-    'server': './src/server/index.ts'
+    'server': './src/server/index.ts',
+    'prerender': './src/server/prerender.ts'
   },
   output: {
     path: resolve('./dist/server'),
