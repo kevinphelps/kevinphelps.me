@@ -5,15 +5,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BlogEntryComponent } from './blog-entry/blog-entry.component';
 import { BlogListComponent } from './blog-list/blog-list.component';
 import { ProfileHeaderComponent } from './profile-header/profile-header.component';
 import { ResumeComponent } from './resume/resume.component';
+import { BlogApiService } from './shared/services/blog-api.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileHeaderComponent,
+    BlogEntryComponent,
     BlogListComponent,
+    ProfileHeaderComponent,
     ResumeComponent
   ],
   imports: [
@@ -22,7 +25,9 @@ import { ResumeComponent } from './resume/resume.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    BlogApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
