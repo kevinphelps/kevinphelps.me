@@ -11,7 +11,7 @@ export class BlogApiController {
   }
 
   @Get('')
-  getBlogEntries(_request: Request, response: Response) {
+  getBlogFilenames(_request: Request, response: Response) {
     return this.fs.readDirectory(blogPath)
       .do(filenames => { response.json(filenames); });
   }

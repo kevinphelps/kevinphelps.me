@@ -10,10 +10,10 @@ import { BlogService } from './../shared/services/blog.service';
   styleUrls: ['./blog-list.component.scss']
 })
 export class BlogListComponent implements OnInit {
-  readonly blogEntries: Observable<BlogEntry[]>;
+  readonly blogList: Observable<BlogEntry[]>;
 
   constructor(private blog: BlogService) {
-    this.blogEntries = this.blog.getBlogEntries().shareReplay(1);
+    this.blogList = this.blog.getBlogList().shareReplay(1);
   }
 
   ngOnInit() {

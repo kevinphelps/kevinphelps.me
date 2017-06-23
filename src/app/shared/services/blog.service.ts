@@ -10,7 +10,7 @@ import { BlogEntry, BlogEntryMetadata } from './../interfaces/blog';
 export class BlogService {
   constructor(private http: Http) { }
 
-  getBlogEntries() {
+  getBlogList() {
     return this.http.get(`${environment.api}/blog`)
       .map(response => response.json() as string[])
       .mergeMap(filenames => Observable.forkJoin(filenames.map(filename => this.getBlogEntryByFilename(filename))));
