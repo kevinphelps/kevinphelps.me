@@ -1,9 +1,10 @@
 import 'reflect-metadata';
 import 'zone.js/dist/zone-node';
 
+import { generateStaticSite } from 'ng-static-site-generator';
+
 import { AppComponent } from './app/app.component';
 import { AppModule } from './app/app.module';
-import { generateStaticSite } from './ng-static-site-generator';
 
 const pageUrls = [
   '/',

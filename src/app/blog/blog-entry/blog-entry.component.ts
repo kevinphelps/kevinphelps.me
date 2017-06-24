@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { BlogEntry, BlogService } from './../../../ng-static-site-generator';
+import { BlogEntry, BlogService } from 'ng-static-site-generator';
 
 interface BlogEntryRouteParams {
   date: string;

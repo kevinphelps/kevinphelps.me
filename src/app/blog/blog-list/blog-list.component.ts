@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { BlogEntry, BlogService } from './../../../ng-static-site-generator';
+import { BlogEntry, BlogService } from 'ng-static-site-generator';
 
 @Component({
   selector: 'app-blog-list',
