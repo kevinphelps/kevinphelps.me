@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "lite-server",
+    "start": "firebase serve",
     "clean": "rimraf dist",
     "lint": "tslint --project tsconfig.json --type-check",
     "prebuild": "npm run clean && npm run lint",
