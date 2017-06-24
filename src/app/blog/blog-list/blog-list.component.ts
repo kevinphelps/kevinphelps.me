@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 
-import { BlogEntry } from './../../shared/interfaces/blog';
-import { BlogService } from './../../shared/services/blog.service';
+import { BlogEntry, BlogService } from './../../../ng-static-site-generator';
 
 @Component({
   selector: 'app-blog-list',
@@ -10,10 +8,10 @@ import { BlogService } from './../../shared/services/blog.service';
   styleUrls: ['./blog-list.component.scss']
 })
 export class BlogListComponent implements OnInit {
-  readonly blogList: Observable<BlogEntry[]>;
+  readonly blogList: BlogEntry[];
 
   constructor(private blog: BlogService) {
-    this.blogList = this.blog.getBlogList().shareReplay(1);
+    this.blogList = this.blog.getBlogList();
   }
 
   ngOnInit() {

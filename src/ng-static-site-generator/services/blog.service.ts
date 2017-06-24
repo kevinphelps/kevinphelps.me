@@ -1,18 +1,27 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { readdirSync, readFileSync } from 'fs';
 import { safeLoad as parseYaml } from 'js-yaml';
-import { Observable } from 'rxjs/Observable';
+import { join as joinPaths } from 'path';
 
-import { environment } from './../../../environments/environment';
-import { BlogEntry, BlogEntryMetadata } from './../interfaces/blog';
+export const BLOG_PATH = new InjectionToken<string>('BLOG_PATH');
+
+export interface BlogEntryMetadata {
+  title: string;
+  description: string;
+}
+
+export interface BlogEntry extends BlogEntryMetadata {
+  date: string;
+  url: string;
+  body: string;
+}
 
 @Injectable()
 export class BlogService {
-  constructor(private http: Http) { }
+  constructor(@Inject(BLOG_PATH) private blogPath: string) { }
 
   getBlogList() {
-    return this.http.get(`${environment.api}/blog`)
-      .map(response => response.json() as BlogEntry[]);
+    return readdirSync(this.blogPath).map(filename => this.getBlogEntryByFilename(filename));
   }
 
   getBlogEntry(date: string, urlSlug: string) {
@@ -22,13 +31,12 @@ export class BlogService {
   }
 
   private getBlogEntryByFilename(filename: string) {
-    return this.http.get(`${environment.serverRoot}/blog/${filename}`)
-      .map(response => response.text())
-      .map(fileContents => BlogService.parseBlogFileContents(filename, fileContents))
-      .catch(error => error.status === 404 ? Observable.of<BlogEntry>(undefined) : Observable.throw(error));
+    const fileContents = readFileSync(joinPaths(this.blogPath, filename)).toString();
+
+    return BlogService.parseBlogFileContents(filename, fileContents);
   }
 
-  static parseBlogFilename(filename: string) {
+  private static parseBlogFilename(filename: string) {
     const filenameMatch = /^([0-9]{4}-[0-9]{2}-[0-9]{2})-(.+).html$/g.exec(filename);
 
     const date = filenameMatch[1];
@@ -37,7 +45,7 @@ export class BlogService {
     return { date, urlSlug };
   }
 
-  static parseBlogFileContents(filename: string, fileContents: string, setBody = true) {
+  private static parseBlogFileContents(filename: string, fileContents: string, setBody = true) {
     const parsedFilename = BlogService.parseBlogFilename(filename);
     const fileContentsMatch = /^---((?:.|\r|\n)+)---((?:.|\r|\n)+)$/g.exec(fileContents);
 

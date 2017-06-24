@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 
-import { BlogEntry } from './../../shared/interfaces/blog';
-import { BlogService } from './../../shared/services/blog.service';
+import { BlogEntry, BlogService } from './../../../ng-static-site-generator';
 
 interface BlogEntryRouteParams {
   date: string;
@@ -16,18 +14,14 @@ interface BlogEntryRouteParams {
   styleUrls: ['./blog-entry.component.scss']
 })
 export class BlogEntryComponent implements OnInit {
-  readonly blogEntry: Observable<BlogEntry>;
+  readonly blogEntry: BlogEntry;
 
   notFound = false;
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private blog: BlogService) {
+  constructor(private activatedRoute: ActivatedRoute, private blog: BlogService) {
+    const params = activatedRoute.snapshot.params as BlogEntryRouteParams;
 
-    this.blogEntry = this.activatedRoute.params
-      .mergeMap((params: BlogEntryRouteParams) => this.blog.getBlogEntry(params.date, params.urlSlug))
-      .do(blogEntry => { this.notFound = blogEntry === undefined; })
-      .shareReplay(1);
+    this.blogEntry = this.blog.getBlogEntry(params.date, params.urlSlug);
   }
 
   ngOnInit() {
