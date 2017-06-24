@@ -3302,9 +3302,9 @@ nested-error-stacks@^1.0.0:
   dependencies:
     inherits "~2.0.1"
 
-ng-static-site-generator@0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/ng-static-site-generator/-/ng-static-site-generator-0.5.2.tgz#3ebe9a199b8d83852e62f8bfa362283bfcff9cd7"
+ng-static-site-generator@0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/ng-static-site-generator/-/ng-static-site-generator-0.5.3.tgz#3b2e75ab0ca48b13f7d90f9f3fc30f7e1e6835b6"
   dependencies:
     "@angular/animations" "4.2.4"
     "@angular/common" "4.2.4"
