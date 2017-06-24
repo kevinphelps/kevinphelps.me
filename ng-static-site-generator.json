@@ -1,0 +1,9 @@
+{
+  "distPath": "./dist",
+  "blogPath": "./src/blog",
+  "stylesPath": "./src/styles.scss",
+  "templatePath": "./src/index.html",
+  "pageUrls": [ "/", "/resume" ],
+  "appModule": "./src/app/app.module#AppModule",
+  "appComponent": "./src/app/app.component#AppComponent"
+}
