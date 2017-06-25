@@ -1,5 +1,9 @@
+import './../rxjs-operators';
+
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { BlogService } from 'ng-static-site-generator';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +14,11 @@ import { ResumeComponent } from './pages/resume/resume.component';
 import { ProfileHeaderComponent } from './shared/components/profile-header/profile-header.component';
 
 @NgModule({
+  imports: [
+    BrowserModule.withServerTransition({ appId: 'kevinphelps.me' }),
+    AppRoutingModule,
+    HttpModule
+  ],
   declarations: [
     AppComponent,
     BlogEntryComponent,
@@ -18,11 +27,9 @@ import { ProfileHeaderComponent } from './shared/components/profile-header/profi
     ProfileHeaderComponent,
     ResumeComponent
   ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'kevinphelps.me' }),
-    AppRoutingModule
+  providers: [
+    BlogService
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
