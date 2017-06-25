@@ -7,7 +7,8 @@
     "clean": "rimraf dist",
     "lint": "tslint --project tsconfig.json --type-check",
     "prebuild": "npm run clean && npm run lint",
-    "build": "ng-static-site-generator",
+    "build": "ng-static-site-generator build",
+    "watch": "ng-static-site-generator watch",
     "deploy": "yarn run build && firebase deploy"
   },
   "private": true,
