@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./default-header.component.scss']
 })
 export class DefaultHeaderComponent implements OnInit {
+  collapseMobileMenu = true;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  toggleMobileMenu() {
+    this.collapseMobileMenu = !this.collapseMobileMenu;
+  }
 }
