@@ -21,7 +21,7 @@ export class BlogEntryComponent implements OnInit {
 
   constructor(activatedRoute: ActivatedRoute, private blog: BlogService) {
     this.blogEntry = activatedRoute.params
-      .switchMap((params: BlogEntryRouteParams) => this.getBlogEntry(params.date, params.urlSlug));
+      .switchMap((params: BlogEntryRouteParams) => this.getBlogEntry(params.date, params.urlSlug).startWith(undefined));
   }
 
   ngOnInit() {

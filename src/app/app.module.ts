@@ -14,6 +14,7 @@ import { ResumeComponent } from './pages/resume/resume.component';
 import { DefaultFooterComponent } from './shared/components/default-footer/default-footer.component';
 import { DefaultHeaderComponent } from './shared/components/default-header/default-header.component';
 import { DefaultLayoutComponent } from './shared/components/default-layout/default-layout.component';
+import { LoadingComponent } from './shared/components/loading/loading.component';
 import { ProfileHeaderComponent } from './shared/components/profile-header/profile-header.component';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ProfileHeaderComponent } from './shared/components/profile-header/profi
     DefaultFooterComponent,
     DefaultHeaderComponent,
     DefaultLayoutComponent,
+    LoadingComponent,
     NotFoundComponent,
     ProfileHeaderComponent,
     ResumeComponent
