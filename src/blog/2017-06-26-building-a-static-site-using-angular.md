@@ -1,7 +1,8 @@
 ---
 title: Building a Static Site Using Angular
-description: 'Best of both worlds: Static site for speed and SEO and Angular for dynamic runtime functionality in the browser. And because
-  writing Angular apps is fun.'
+description: ng-static-site-generator is a webpack-based command line build tool that builds an Angular app and Jekyll-style blog entry html
+  files into a static html and css website. It also supports building a client app so you can have static pages that are also capable of
+  running dynamic functionality coded in Angular.
 ---
 
 ## Building a Static Site Using Angular
