@@ -3,7 +3,7 @@
 </ng-container>
 
 <ng-template #loading>
-  <app-loading></app-loading>
+  <app-loading *ngIf="notFound === false"></app-loading>
 </ng-template>
 
 <ng-container *ngIf="blogEntry | async; let blogEntry; else loading">
