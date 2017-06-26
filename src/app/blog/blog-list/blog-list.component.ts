@@ -11,7 +11,8 @@ export class BlogListComponent implements OnInit {
   readonly blogList: Observable<BlogEntry[]>;
 
   constructor(private blog: BlogService) {
-    this.blogList = this.blog.getBlogList();
+    this.blogList = this.blog.getBlogList()
+      .map(blogList => blogList.sort((entryA, entryB) => entryB.date.localeCompare(entryA.date)).splice(0, 5));
   }
 
   ngOnInit() {
