@@ -25,21 +25,15 @@
     "@angular/router": "4.2.4",
     "bootstrap": "3.3.7",
     "core-js": "2.4.1",
-    "html-minifier": "3.5.2",
-    "js-yaml": "3.8.4",
     "ng-static-site-generator": "0.7.0",
     "normalize.css": "7.0.0",
+    "reflect-metadata": "0.1.10",
     "rxjs": "5.4.1",
     "zone.js": "0.8.12"
   },
   "devDependencies": {
-    "@types/html-minifier": "1.1.30",
-    "@types/js-yaml": "3.5.31",
-    "@types/node": "8.0.1",
-    "@types/rimraf": "0.0.28",
     "codelyzer": "2.0.1",
     "firebase-tools": "3.9.1",
-    "reflect-metadata": "0.1.10",
     "rimraf": "2.6.1",
     "tslint": "4.5.1",
     "typescript": "2.3.4"
