@@ -8,6 +8,7 @@
     "lint": "tslint --project tsconfig.json --type-check",
     "prebuild": "npm run clean && npm run lint",
     "build": "ng-static-site-generator build",
+    "prewatch": "npm run clean",
     "watch": "ng-static-site-generator watch",
     "deploy": "yarn run build && firebase deploy"
   },
