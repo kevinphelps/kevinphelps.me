@@ -15,6 +15,6 @@
     <p>{{ blogEntry.description }}</p>
   </blockquote>
 
-  <div [innerHTML]="blogEntry.body"></div>
+  <div [innerHTML]="trustedBody | async"></div>
 </ng-container>
 

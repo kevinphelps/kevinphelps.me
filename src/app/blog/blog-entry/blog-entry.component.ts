@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { BlogEntry, BlogService } from 'ng-static-site-generator';
 import { Observable } from 'rxjs/Observable';
@@ -16,12 +17,16 @@ interface BlogEntryRouteParams {
 })
 export class BlogEntryComponent implements OnInit {
   readonly blogEntry: Observable<BlogEntry>;
+  readonly trustedBody: Observable<string>;
 
   notFound = false;
 
-  constructor(activatedRoute: ActivatedRoute, private blog: BlogService) {
+  constructor(activatedRoute: ActivatedRoute, domSanitizer: DomSanitizer, private blog: BlogService) {
     this.blogEntry = activatedRoute.params
       .switchMap((params: BlogEntryRouteParams) => this.getBlogEntry(params.date, params.urlSlug).startWith(undefined));
+
+    this.trustedBody = this.blogEntry
+      .map(blogEntry => blogEntry ? domSanitizer.bypassSecurityTrustHtml(blogEntry.body) : undefined);
   }
 
   ngOnInit() {
