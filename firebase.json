@@ -2,6 +2,14 @@
   "hosting": {
     "public": "dist",
     "cleanUrls": true,
-    "trailingSlash": false
+    "trailingSlash": false,
+    "headers": [
+      {
+        "source" : "**/*.json",
+        "headers" : [
+          { "key" : "Cache-Control", "value" : "must-revalidate" }
+        ]
+      }
+    ]
   }
 }
