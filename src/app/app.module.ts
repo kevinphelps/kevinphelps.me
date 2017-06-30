@@ -21,7 +21,7 @@ import { AppBlogService } from './shared/services/app-blog-service';
 import { reducer } from './shared/store/app.state';
 
 const ngStaticSiteGeneratorModuleOptions: ModuleOptions = {
-  openExternalLinksInNewTab: false
+  openExternalLinksInNewTab: true
 };
 
 @NgModule({
