@@ -1,11 +1,10 @@
-
 import './../rxjs-operators';
 
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
-import { BlogService } from 'ng-static-site-generator/dist';
+import { BlogService } from 'ng-static-site-generator';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
