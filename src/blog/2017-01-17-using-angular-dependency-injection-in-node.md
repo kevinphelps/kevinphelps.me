@@ -43,7 +43,7 @@ application itself.
 ### Using Angular's Dependency Injection in Node
 
 Because Angular is designed to be a modular system, we can import
-[RelectiveInjector)(https://angular.io/docs/ts/latest/api/core/index/ReflectiveInjector-class.html)
+[RelectiveInjector](https://angular.io/docs/ts/latest/api/core/index/ReflectiveInjector-class.html)
 from the `@angular/core` project in order to use the Angular dependency injection system to manage dependencies in any Javascript
 application. As an example, I will demonstrate how to use it in a generic Node application.
 
