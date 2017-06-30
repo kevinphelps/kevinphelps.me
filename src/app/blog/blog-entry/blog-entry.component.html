@@ -1,9 +1,9 @@
-<ng-container *ngIf="notFound">
+<ng-container *ngIf="notFound | async">
   <app-not-found></app-not-found>
 </ng-container>
 
 <ng-template #loading>
-  <app-loading *ngIf="notFound === false"></app-loading>
+  <app-loading *ngIf="(notFound | async) === false"></app-loading>
 </ng-template>
 
 <ng-container *ngIf="blogEntry | async; let blogEntry; else loading">

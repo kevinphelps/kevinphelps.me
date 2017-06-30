@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
-import { BlogService } from 'ng-static-site-generator';
+import { BlogEntry, BlogService } from 'ng-static-site-generator';
 import { AppState } from './../store/app.state';
 import { LoadBlogEntryAction, LoadBlogListAction } from './../store/blog/blog.actions';
 
@@ -25,6 +27,7 @@ export class AppBlogService {
 
   loadBlogEntry(date: string, urlSlug: string) {
     return this.blog.getBlogEntry(date, urlSlug)
-      .do(blogEntry => { this.store.dispatch(new LoadBlogEntryAction(blogEntry)); });
+      .do(blogEntry => { this.store.dispatch(new LoadBlogEntryAction(blogEntry)); })
+      .catch((response: Response) => response.status === 404 ? Observable.of<BlogEntry>(undefined) : Observable.throw(response));
   }
 }
