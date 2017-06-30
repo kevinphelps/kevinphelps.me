@@ -11,8 +11,7 @@ export class AppBlogService {
   }
 
   getBlogList() {
-    return this.store.select(state => state.blog.blogList)
-      .map(blogList => [...blogList].sort((entryA, entryB) => entryB.date.localeCompare(entryA.date)));
+    return this.store.select(state => state.blog.blogList);
   }
 
   getBlogEntry(date: string, urlSlug: string) {

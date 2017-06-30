@@ -14,7 +14,7 @@ export class BlogListComponent implements OnInit {
 
   constructor(private blog: AppBlogService) {
     this.blogList = this.blog.getBlogList()
-      .map(blogList => blogList.splice(0, 5));
+      .map(blogList => [...blogList].splice(0, 5));
   }
 
   ngOnInit() {
