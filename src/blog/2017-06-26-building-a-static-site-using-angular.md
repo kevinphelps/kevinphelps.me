@@ -72,4 +72,3 @@ This is the content of the blog entry.
 
 <p>You can also write content in html if you want.</p>
 ```
-
