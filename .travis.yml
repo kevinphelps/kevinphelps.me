@@ -4,4 +4,4 @@ node_js:
 install:
  - yarn --pure-lockfile
 script:
-- yarn run deploy
+- yarn run build--prod
