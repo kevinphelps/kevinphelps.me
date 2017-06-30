@@ -8,15 +8,18 @@
     "lint": "tslint --project tsconfig.json --type-check",
     "prebuild": "npm run clean && npm run lint",
     "build": "ng-static-site-generator build",
+    "prebuild--prod": "npm run prebuild",
+    "build--prod": "ng-static-site-generator build --prod",
     "prewatch": "npm run clean",
     "watch": "ng-static-site-generator watch",
-    "deploy": "yarn run build && firebase deploy"
+    "deploy": "yarn run build--prod && firebase deploy"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "4.2.4",
     "@angular/common": "4.2.4",
     "@angular/compiler": "4.2.4",
+    "@angular/compiler-cli": "4.2.4",
     "@angular/core": "4.2.4",
     "@angular/http": "4.2.4",
     "@angular/platform-browser": "4.2.4",
@@ -27,7 +30,7 @@
     "@ngrx/store": "2.2.2",
     "bootstrap": "3.3.7",
     "core-js": "2.4.1",
-    "ng-static-site-generator": "0.7.4",
+    "ng-static-site-generator": "0.8.0",
     "ngrx-store-freeze": "0.1.9",
     "normalize.css": "7.0.0",
     "reflect-metadata": "0.1.10",

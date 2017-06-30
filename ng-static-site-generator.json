@@ -7,5 +7,11 @@
   "templatePath": "./src/index.html",
   "appModule": "./src/renderer/app-renderer.module#AppRendererModule",
   "appRoutes": "./src/app/app-routing.module#routes",
-  "appComponent": "./src/app/app.component#AppComponent"
+  "appComponent": "./src/app/app.component#AppComponent",
+  "tsConfigPath": "./tsconfig.json",
+  "environmentSource": "./src/environments/environment.ts",
+  "environments": {
+    "dev": "./src/environments/environment.ts",
+    "prod": "./src/environments/environment.prod.ts"
+  }
 }

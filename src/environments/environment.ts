@@ -1,7 +1,7 @@
-const node = typeof window === 'undefined';
+import { commonEnvironment } from './environment.common';
 
-export const environment = {
-  node,
-  browser: node === false,
+export const devEnvironment = {
   production: false
 };
+
+export const environment = { ...commonEnvironment, ...devEnvironment };
