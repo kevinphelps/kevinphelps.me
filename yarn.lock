@@ -2382,6 +2382,10 @@ he@1.1.x:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
+highlight.js@9.12.0:
+  version "9.12.0"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -3372,9 +3376,9 @@ nested-error-stacks@^1.0.0:
   dependencies:
     inherits "~2.0.1"
 
-ng-static-site-generator@0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/ng-static-site-generator/-/ng-static-site-generator-0.9.0.tgz#67ce43a7ddc20c9128e4136424e7fa0e25c38f21"
+ng-static-site-generator@0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/ng-static-site-generator/-/ng-static-site-generator-0.10.1.tgz#189304afc7ada0242c9a27557c2b1a44a9cdebc8"
   dependencies:
     "@ngtools/webpack" "1.5.0"
     angular2-template-loader "0.6.2"
@@ -3386,6 +3390,7 @@ ng-static-site-generator@0.9.0:
     extract-text-webpack-plugin "2.1.2"
     file-loader "0.11.2"
     folder-hash "1.1.1"
+    highlight.js "9.12.0"
     html-loader "0.4.5"
     html-minifier "3.5.2"
     html-webpack-exclude-assets-plugin "0.0.5"
