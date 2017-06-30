@@ -1,9 +1,11 @@
+
 import './../rxjs-operators';
 
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { BlogService } from 'ng-static-site-generator';
+import { StoreModule } from '@ngrx/store';
+import { BlogService } from 'ng-static-site-generator/dist';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,12 +18,15 @@ import { DefaultHeaderComponent } from './shared/components/default-header/defau
 import { DefaultLayoutComponent } from './shared/components/default-layout/default-layout.component';
 import { LoadingComponent } from './shared/components/loading/loading.component';
 import { ProfileHeaderComponent } from './shared/components/profile-header/profile-header.component';
+import { AppBlogService } from './shared/services/app-blog-service';
+import { reducer } from './shared/store/app.state';
 
 @NgModule({
   imports: [
     BrowserModule.withServerTransition({ appId: 'kevinphelps.me' }),
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    StoreModule.provideStore(reducer)
   ],
   declarations: [
     AppComponent,
@@ -36,6 +41,7 @@ import { ProfileHeaderComponent } from './shared/components/profile-header/profi
     ResumeComponent
   ],
   providers: [
+    AppBlogService,
     BlogService
   ],
   bootstrap: [AppComponent]

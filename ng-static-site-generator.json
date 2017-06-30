@@ -5,7 +5,7 @@
   "polyfillsPath": "./src/polyfills.ts",
   "stylesPath": "./src/styles.scss",
   "templatePath": "./src/index.html",
-  "appModule": "./src/app/app.module#AppModule",
+  "appModule": "./src/renderer/app-renderer.module#AppRendererModule",
   "appRoutes": "./src/app/app-routing.module#routes",
   "appComponent": "./src/app/app.component#AppComponent"
 }

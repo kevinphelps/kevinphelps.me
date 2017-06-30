@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogEntry, BlogService } from 'ng-static-site-generator';
+import { BlogEntry } from 'ng-static-site-generator';
 import { Observable } from 'rxjs/Observable';
+
+import { AppBlogService } from './../../shared/services/app-blog-service';
 
 @Component({
   selector: 'app-blog-list',
@@ -10,11 +12,12 @@ import { Observable } from 'rxjs/Observable';
 export class BlogListComponent implements OnInit {
   readonly blogList: Observable<BlogEntry[]>;
 
-  constructor(private blog: BlogService) {
+  constructor(private blog: AppBlogService) {
     this.blogList = this.blog.getBlogList()
-      .map(blogList => blogList.sort((entryA, entryB) => entryB.date.localeCompare(entryA.date)).splice(0, 5));
+      .map(blogList => blogList.splice(0, 5));
   }
 
   ngOnInit() {
+    this.blog.loadBlogList().subscribe(() => { });
   }
 }

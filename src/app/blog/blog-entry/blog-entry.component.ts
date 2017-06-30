@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Response } from '@angular/http';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { BlogEntry, BlogService } from 'ng-static-site-generator';
+import { BlogEntry } from 'ng-static-site-generator';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+
+import { AppBlogService } from './../../shared/services/app-blog-service';
 
 interface BlogEntryRouteParams {
   date: string;
@@ -15,29 +17,33 @@ interface BlogEntryRouteParams {
   templateUrl: './blog-entry.component.html',
   styleUrls: ['./blog-entry.component.scss']
 })
-export class BlogEntryComponent implements OnInit {
+export class BlogEntryComponent implements OnInit, OnDestroy {
   readonly blogEntry: Observable<BlogEntry>;
   readonly trustedBody: Observable<string>;
 
   notFound = false;
 
-  constructor(activatedRoute: ActivatedRoute, domSanitizer: DomSanitizer, private blog: BlogService) {
+  private loadSubscription: Subscription;
+
+  constructor(domSanitizer: DomSanitizer, private activatedRoute: ActivatedRoute, private blog: AppBlogService) {
     this.blogEntry = activatedRoute.params
-      .switchMap((params: BlogEntryRouteParams) => this.getBlogEntry(params.date, params.urlSlug).startWith(undefined));
+      .switchMap((params: BlogEntryRouteParams) => blog.getBlogEntry(params.date, params.urlSlug))
+      .do(blogEntry => { this.notFound = blogEntry === undefined; });
 
     this.trustedBody = this.blogEntry
       .map(blogEntry => blogEntry ? domSanitizer.bypassSecurityTrustHtml(blogEntry.body) : undefined);
   }
 
   ngOnInit() {
+    this.loadSubscription = this.activatedRoute.params
+      .switchMap((params: BlogEntryRouteParams) => this.blog.loadBlogEntry(params.date, params.urlSlug))
+      .subscribe(() => { });
   }
 
-  private getBlogEntry(date: string, urlSlug: string) {
-    return this.blog.getBlogEntry(date, urlSlug)
-      .catch((error: Response) => {
-        this.notFound = error.status === 404;
-        return this.notFound ? Observable.of<BlogEntry>(undefined) : Observable.throw(error);
-      })
-      .do(blogEntry => { this.notFound = blogEntry === undefined; });
+  ngOnDestroy() {
+    if (this.loadSubscription !== undefined) {
+      this.loadSubscription.unsubscribe();
+      this.loadSubscription = undefined;
+    }
   }
 }
