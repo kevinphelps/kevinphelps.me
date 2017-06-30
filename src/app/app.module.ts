@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
-import { BlogService } from 'ng-static-site-generator';
+import { ModuleOptions, NgStaticSiteGeneratorModule } from 'ng-static-site-generator';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,11 +20,16 @@ import { ProfileHeaderComponent } from './shared/components/profile-header/profi
 import { AppBlogService } from './shared/services/app-blog-service';
 import { reducer } from './shared/store/app.state';
 
+const ngStaticSiteGeneratorModuleOptions: ModuleOptions = {
+  openExternalLinksInNewTab: false
+};
+
 @NgModule({
   imports: [
     BrowserModule.withServerTransition({ appId: 'kevinphelps.me' }),
     AppRoutingModule,
     HttpModule,
+    NgStaticSiteGeneratorModule.forRoot(ngStaticSiteGeneratorModuleOptions),
     StoreModule.provideStore(reducer)
   ],
   declarations: [
@@ -40,8 +45,7 @@ import { reducer } from './shared/store/app.state';
     ResumeComponent
   ],
   providers: [
-    AppBlogService,
-    BlogService
+    AppBlogService
   ],
   bootstrap: [AppComponent]
 })

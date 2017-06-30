@@ -3372,9 +3372,9 @@ nested-error-stacks@^1.0.0:
   dependencies:
     inherits "~2.0.1"
 
-ng-static-site-generator@0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/ng-static-site-generator/-/ng-static-site-generator-0.8.0.tgz#ca9e1477dd2c224361cedc2bec6ede73f86c2597"
+ng-static-site-generator@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/ng-static-site-generator/-/ng-static-site-generator-0.9.0.tgz#67ce43a7ddc20c9128e4136424e7fa0e25c38f21"
   dependencies:
     "@ngtools/webpack" "1.5.0"
     angular2-template-loader "0.6.2"
@@ -3393,6 +3393,7 @@ ng-static-site-generator@0.8.0:
     js-yaml "3.8.4"
     marked "0.3.6"
     node-sass "4.5.3"
+    parse5 "3.0.2"
     sass-loader "6.0.6"
     style-loader "0.18.2"
     to-string-loader "1.1.5"
@@ -3781,7 +3782,7 @@ parse-json@^2.1.0, parse-json@^2.2.0:
   dependencies:
     error-ex "^1.2.0"
 
-parse5@^3.0.1:
+parse5@3.0.2, parse5@^3.0.1:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-3.0.2.tgz#05eff57f0ef4577fb144a79f8b9a967a6cc44510"
   dependencies:
