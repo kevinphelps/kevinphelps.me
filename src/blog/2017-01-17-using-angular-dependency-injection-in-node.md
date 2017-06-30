@@ -4,7 +4,9 @@ description: Angular's dependency injection system can be used to manage depende
   demonstrate how to use it in a generic Node application.
 ---
 
-## Brief Introduction to Dependency Injection in Angular
+## Using Angular's Dependency Injection in Node
+
+### Brief Introduction to Dependency Injection in Angular
 
 Angular's dependency injection system is core to the framework. Is is used to expose framework services to the running application and to
 inject an application's services into its own components and services.
