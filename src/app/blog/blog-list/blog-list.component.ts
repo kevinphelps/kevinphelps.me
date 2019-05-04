@@ -1,23 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { BlogEntry } from 'ng-static-site-generator';
-import { Observable } from 'rxjs/Observable';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 
-import { AppBlogService } from './../../shared/services/app-blog-service';
+import { BlogEntry, BlogService } from './../../shared/services/blog-service';
 
 @Component({
   selector: 'app-blog-list',
-  templateUrl: './blog-list.component.html',
-  styleUrls: ['./blog-list.component.scss']
+  templateUrl: './blog-list.component.html'
 })
-export class BlogListComponent implements OnInit {
+export class BlogListComponent {
   readonly blogList: Observable<BlogEntry[]>;
 
-  constructor(private blog: AppBlogService) {
-    this.blogList = this.blog.getBlogList()
-      .map(blogList => [...blogList].splice(0, 5));
-  }
-
-  ngOnInit() {
-    this.blog.loadBlogList().subscribe(() => { });
+  constructor(private readonly blogService: BlogService) {
+    this.blogList = this.blogService.getBlogList().pipe(shareReplay(1));
   }
 }

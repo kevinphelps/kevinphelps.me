@@ -10,14 +10,15 @@ import { ProfileHeaderComponent } from './shared/components/profile-header/profi
 
 export const routes: Routes = [
   {
-    path: '', component: DefaultLayoutComponent, children: [
+    path: '',
+    component: DefaultLayoutComponent,
+    children: [
       {
-        path: '', component: ProfileHeaderComponent, children: [
-          { path: '', component: BlogListComponent },
-          { path: 'resume', component: ResumeComponent }
-        ]
+        path: '',
+        component: ProfileHeaderComponent,
+        children: [{ path: '', component: BlogListComponent }, { path: 'resume', component: ResumeComponent }]
       },
-      { path: 'blog/:date/:urlSlug', component: BlogEntryComponent },
+      { path: 'blog/:blogEntry', component: BlogEntryComponent },
       { path: '**', component: NotFoundComponent }
     ]
   }
@@ -27,4 +28,4 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

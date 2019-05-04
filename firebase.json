@@ -5,10 +5,26 @@
     "trailingSlash": false,
     "headers": [
       {
-        "source" : "**/*.json",
-        "headers" : [
-          { "key" : "Cache-Control", "value" : "must-revalidate" }
-        ]
+        "source": "**/*.json",
+        "headers": [{ "key": "Cache-Control", "value": "must-revalidate" }]
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/blog/2017-06-30/handling-external-links-in-angular",
+        "destination": "/blog/2017-06-30-handling-external-links-in-angular",
+        "type": 301
+      },
+      {
+        "source": "/blog/2017-01-17/using-angular-dependency-injection-in-node",
+        "destination": "/blog/2017-01-17-using-angular-dependency-injection-in-node",
+        "type": 301
       }
     ]
   }

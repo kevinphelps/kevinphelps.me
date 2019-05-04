@@ -1,17 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-default-header',
-  templateUrl: './default-header.component.html',
-  styleUrls: ['./default-header.component.scss']
+  templateUrl: './default-header.component.html'
 })
-export class DefaultHeaderComponent implements OnInit {
+export class DefaultHeaderComponent {
   collapseMobileMenu = true;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   toggleMobileMenu() {
     this.collapseMobileMenu = !this.collapseMobileMenu;

@@ -8,4 +8,10 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    await platformBrowserDynamic().bootstrapModule(AppModule);
+  } catch (error) {
+    console.error(error);
+  }
+});

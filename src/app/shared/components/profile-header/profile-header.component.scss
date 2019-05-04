@@ -1,9 +1,10 @@
 .active-link {
-   pointer-events: none;
-   cursor: default;
-   color: initial;
+  pointer-events: none;
+  cursor: default;
+  color: initial;
 
-   &:hover, &:focus {
-     text-decoration: none;
-   }
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
 }

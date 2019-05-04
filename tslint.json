@@ -1,34 +1,32 @@
 {
-  "rulesDirectory": [
-    "node_modules/codelyzer"
-  ],
+  "rulesDirectory": ["node_modules/codelyzer", "tslint-consistent-codestyle", "tslint-no-focused-test"],
   "rules": {
+    // core tslint rules
+    "adjacent-overload-signatures": true,
+    "array-type": [true, "array"],
     "arrow-return-shorthand": true,
+    "ban-comma-operator": true,
+    "ban-types": [
+      true,
+      ["Array", "Use [] instead."],
+      ["Object", "Use {} instead."],
+      ["Boolean", "Use 'boolean' instead."],
+      ["Number", "Use 'number' instead."],
+      ["String", "Use 'string' instead."]
+    ],
     "callable-types": true,
     "class-name": true,
-    "comment-format": [
-      true,
-      "check-space"
-    ],
+    "comment-format": [true, "check-space"],
     "curly": true,
-    "eofline": true,
+    "cyclomatic-complexity": true,
+    "encoding": true,
     "forin": true,
-    "import-blacklist": [
-      true,
-      "rxjs"
-    ],
-    "import-spacing": true,
-    "indent": [
-      true,
-      "spaces"
-    ],
+    "function-constructor": true,
+    "import-blacklist": [true, "lodash", "lodash-es"],
+    "interface-name": [true, "never-prefix"],
     "interface-over-type-literal": true,
     "label-position": true,
-    "max-line-length": [
-      true,
-      180
-    ],
-    "member-access": false,
+    "member-access": [true, "no-public"],
     "member-ordering": [
       true,
       {
@@ -42,111 +40,99 @@
         ]
       }
     ],
+    "no-angle-bracket-type-assertion": true,
     "no-arg": true,
     "no-bitwise": true,
-    "no-console": [
-      true,
-      "debug",
-      "info",
-      "time",
-      "timeEnd",
-      "trace"
-    ],
+    "no-console": [true, "debug", "info", "time", "timeEnd", "trace"],
     "no-construct": true,
     "no-debugger": true,
+    "no-default-export": true,
+    "no-duplicate-imports": true,
     "no-duplicate-super": true,
-    "no-empty": false,
+    "no-duplicate-switch-case": true,
+    "no-duplicate-variable": [true, "check-parameters"],
+    "no-empty": true,
     "no-empty-interface": true,
     "no-eval": true,
-    "no-inferrable-types": [
-      true,
-      "ignore-params"
-    ],
+    "no-for-in-array": true,
+    "no-inferrable-types": true,
+    "no-internal-module": true,
+    "no-invalid-template-strings": true,
     "no-misused-new": true,
+    "no-namespace": true,
     "no-non-null-assertion": true,
+    "no-object-literal-type-assertion": true,
     "no-shadowed-variable": true,
+    "no-sparse-arrays": true,
     "no-string-literal": false,
     "no-string-throw": true,
     "no-switch-case-fall-through": true,
-    "no-trailing-whitespace": true,
+    "no-unbound-method": [true, "ignore-static"],
+    "no-unsafe-finally": true,
     "no-unnecessary-initializer": true,
+    "no-unnecessary-type-assertion": true,
     "no-unused-expression": true,
-    "no-unused-variable": [true, "check-parameters", {"ignore-pattern": "^_"}],
     "no-use-before-declare": false,
     "no-var-keyword": true,
+    "no-void-expression": true,
+    "object-literal-shorthand": true,
     "object-literal-sort-keys": false,
-    "one-line": [
-      true,
-      "check-open-brace",
-      "check-catch",
-      "check-else",
-      "check-whitespace"
-    ],
+    "one-variable-per-declaration": true,
+    "only-arrow-functions": [true, "allow-declarations", "allow-named-functions"],
     "ordered-imports": [
       true,
       {
-        "import-sources-order": "lowercase-last",
+        "grouped-imports": true,
+        "import-sources-order": "lowercase-first",
         "named-imports-order": "lowercase-first"
       }
     ],
     "prefer-const": true,
-    "quotemark": [
-      true,
-      "single"
-    ],
+    "prefer-for-of": true,
+    "prefer-object-spread": true,
+    "prefer-template": true,
     "radix": true,
-    "semicolon": [
-      true,
-      "always"
-    ],
-    "triple-equals": [
-      true,
-      "allow-null-check"
-    ],
-    "typedef-whitespace": [
-      true,
-      {
-        "call-signature": "nospace",
-        "index-signature": "nospace",
-        "parameter": "nospace",
-        "property-declaration": "nospace",
-        "variable-declaration": "nospace"
-      }
-    ],
-    "typeof-compare": true,
+    "restrict-plus-operands": true,
+    "return-undefined": true,
+    "triple-equals": [true, "allow-null-check"],
     "unified-signatures": true,
+    "unnecessary-constructor": true,
+    "use-default-type-parameter": true,
+    "use-isnan": true,
     "variable-name": false,
-    "whitespace": [
-      true,
-      "check-branch",
-      "check-decl",
-      "check-operator",
-      "check-separator",
-      "check-type"
-    ],
-    "directive-selector": [
-      true,
-      "attribute",
-      "app",
-      "camelCase"
-    ],
-    "component-selector": [
-      true,
-      "element",
-      "app",
-      "kebab-case"
-    ],
-    "use-input-property-decorator": true,
-    "use-output-property-decorator": true,
-    "use-host-property-decorator": true,
-    "no-input-rename": true,
-    "no-output-rename": true,
-    "use-life-cycle-interface": true,
-    "use-pipe-transform-interface": true,
+
+    // tslint-consistent-codestyle
+    "no-accessor-recursion": true,
+    "no-collapsible-if": true,
+    "no-unnecessary-type-annotation": true,
+    "no-unused": [true, "unused-catch-binding", "unused-class-expression-name", "unused-function-expression-name"],
+    "prefer-const-enum": true,
+
+    // tslint-no-focused-test
+    "no-focused-test": true,
+
+    // codelyzer
     "component-class-suffix": true,
+    "component-selector": [true, "element", ["app", "es"], "kebab-case"],
+    "contextual-lifecycle": true,
+    "contextual-decorator": true,
     "directive-class-suffix": true,
-    "no-access-missing-member": true,
-    "templates-use-public": true,
-    "invoke-injectable": true
+    "directive-selector": [true, "attribute", ["app", "es"], "camelCase"],
+    "use-component-selector": true,
+    "no-attribute-decorator": true,
+    "no-conflicting-lifecycle": true,
+    "no-input-rename": false,
+    "no-output-native": true,
+    "no-output-on-prefix": true,
+    "no-output-rename": true,
+    "pipe-prefix": "app",
+    "prefer-output-readonly": true,
+    "template-cyclomatic-complexity": [true, 35],
+    "template-conditional-complexity": [true, 3],
+    "no-host-metadata-property": true,
+    "no-inputs-metadata-property": true,
+    "use-lifecycle-interface": true,
+    "no-outputs-metadata-property": true,
+    "use-pipe-transform-interface": true
   }
 }

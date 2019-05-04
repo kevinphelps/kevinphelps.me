@@ -1,60 +1,30 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DomSanitizer, Meta, Title } from '@angular/platform-browser';
+import { Component } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { BlogEntry } from 'ng-static-site-generator';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { shareReplay, switchMap, tap } from 'rxjs/operators';
 
-import { AppBlogService } from './../../shared/services/app-blog-service';
-
-interface BlogEntryRouteParams {
-  date: string;
-  urlSlug: string;
-}
+import { BlogEntry, BlogService } from './../../shared/services/blog-service';
 
 @Component({
   selector: 'app-blog-entry',
-  templateUrl: './blog-entry.component.html',
-  styleUrls: ['./blog-entry.component.scss']
+  templateUrl: './blog-entry.component.html'
 })
-export class BlogEntryComponent implements OnInit, OnDestroy {
+export class BlogEntryComponent {
   readonly blogEntry: Observable<BlogEntry>;
-  readonly trustedBody: Observable<string>;
   readonly notFound = new BehaviorSubject(false);
 
-  private originalTitle: string;
-  private loadSubscription: Subscription;
-
-  constructor(
-    domSanitizer: DomSanitizer,
-    private meta: Meta,
-    private title: Title,
-    private activatedRoute: ActivatedRoute,
-    private blog: AppBlogService) {
-    this.blogEntry = activatedRoute.params
-      .switchMap((params: BlogEntryRouteParams) => blog.getBlogEntry(params.date, params.urlSlug))
-      .do(blogEntry => { this.landOnBlogEntry(blogEntry); });
-
-    this.trustedBody = this.blogEntry
-      .map(blogEntry => blogEntry ? domSanitizer.bypassSecurityTrustHtml(blogEntry.body) : undefined);
+  constructor(private readonly title: Title, private meta: Meta, private activatedRoute: ActivatedRoute, private blogService: BlogService) {
+    this.blogEntry = this.getBlogEntry().pipe(shareReplay(1));
   }
 
-  ngOnInit() {
-    this.originalTitle = this.title.getTitle();
-
-    this.loadSubscription = this.activatedRoute.params
-      .switchMap((params: BlogEntryRouteParams) => this.blog.loadBlogEntry(params.date, params.urlSlug))
-      .subscribe(blogEntry => { this.notFound.next(blogEntry === undefined); });
-  }
-
-  ngOnDestroy() {
-    this.title.setTitle(this.originalTitle);
-
-    if (this.loadSubscription !== undefined) {
-      this.loadSubscription.unsubscribe();
-      this.loadSubscription = undefined;
-    }
+  private getBlogEntry() {
+    return this.activatedRoute.params.pipe(
+      switchMap(({ blogEntry }) => this.blogService.getBlogEntry(blogEntry)),
+      tap(blogEntry => {
+        this.landOnBlogEntry(blogEntry);
+      })
+    );
   }
 
   private landOnBlogEntry(blogEntry: BlogEntry) {

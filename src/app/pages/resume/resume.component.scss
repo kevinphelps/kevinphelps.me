@@ -1,16 +1,39 @@
 .resume {
-  legend { margin-bottom: 10px; }
-  ul { padding-left: 20px; }
-  
-  .section { margin-bottom: 15px; }
-  .place { font-weight: bold; margin-bottom: 0px; }
-  .title { font-style: italic; margin-bottom: 0px; }
-  .project { font-weight: bold; margin-bottom: 0px; }
-  .date { float: right; }
+  legend {
+    margin-bottom: 10px;
+  }
+  ul {
+    padding-left: 20px;
+  }
+
+  .section {
+    margin-bottom: 15px;
+  }
+  .place {
+    font-weight: bold;
+    margin-bottom: 0px;
+  }
+  .title {
+    font-style: italic;
+    margin-bottom: 0px;
+  }
+  .project {
+    font-weight: bold;
+    margin-bottom: 0px;
+  }
+  .date {
+    float: right;
+  }
 
   @media (max-width: 800px) {
-    .date { float: none; }
-    .date::before { content: '('; }
-    .date::after { content: ')'; }
+    .date {
+      float: none;
+    }
+    .date::before {
+      content: '(';
+    }
+    .date::after {
+      content: ')';
+    }
   }
 }

@@ -1,10 +1,7 @@
-import './../rxjs-operators';
-
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { StoreModule } from '@ngrx/store';
-import { ModuleOptions, NgStaticSiteGeneratorModule } from 'ng-static-site-generator';
+import * as parseUrl from 'url-parse';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,36 +14,37 @@ import { DefaultHeaderComponent } from './shared/components/default-header/defau
 import { DefaultLayoutComponent } from './shared/components/default-layout/default-layout.component';
 import { LoadingComponent } from './shared/components/loading/loading.component';
 import { ProfileHeaderComponent } from './shared/components/profile-header/profile-header.component';
-import { AppBlogService } from './shared/services/app-blog-service';
-import { reducer } from './shared/store/app.state';
+import { MarkdownPipe } from './shared/pipes/markdown.pipe';
+import { SafeHtmlPipe } from './shared/pipes/safe-html.pipe';
+import { TransferStateModule } from './shared/transfer-state/transfer-state.module';
 
-const ngStaticSiteGeneratorModuleOptions: ModuleOptions = {
-  openExternalLinksInNewTab: true
-};
+const components = [
+  AppComponent,
+  BlogEntryComponent,
+  BlogListComponent,
+  DefaultFooterComponent,
+  DefaultHeaderComponent,
+  DefaultLayoutComponent,
+  LoadingComponent,
+  NotFoundComponent,
+  ProfileHeaderComponent,
+  ResumeComponent
+];
+
+const pipes = [MarkdownPipe, SafeHtmlPipe];
 
 @NgModule({
   imports: [
-    BrowserModule.withServerTransition({ appId: 'kevinphelps.me' }),
+    BrowserModule.withServerTransition({ appId: 'kevinphelps-me' }),
+    HttpClientModule,
     AppRoutingModule,
-    HttpModule,
-    NgStaticSiteGeneratorModule.forRoot(ngStaticSiteGeneratorModuleOptions),
-    StoreModule.provideStore(reducer)
+    TransferStateModule.forRoot(isPrerendering)
   ],
-  declarations: [
-    AppComponent,
-    BlogEntryComponent,
-    BlogListComponent,
-    DefaultFooterComponent,
-    DefaultHeaderComponent,
-    DefaultLayoutComponent,
-    LoadingComponent,
-    NotFoundComponent,
-    ProfileHeaderComponent,
-    ResumeComponent
-  ],
-  providers: [
-    AppBlogService
-  ],
+  declarations: [...components, ...pipes],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
+
+export function isPrerendering() {
+  return parseUrl(window.location.href, true).query['prerendering'] === true.toString();
+}

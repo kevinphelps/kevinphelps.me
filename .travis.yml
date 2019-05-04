@@ -1,5 +1,5 @@
 language: node_js
 node_js:
-- 8.1.4
+  - 10.15.3
 script:
-- yarn run build--prod
+  - yarn run build --prod

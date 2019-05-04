@@ -1,12 +1,4 @@
-<ng-container *ngIf="notFound | async">
-  <app-not-found></app-not-found>
-</ng-container>
-
-<ng-template #loading>
-  <app-loading *ngIf="(notFound | async) === false"></app-loading>
-</ng-template>
-
-<ng-container *ngIf="blogEntry | async; let blogEntry; else loading">
+<ng-container *ngIf="blogEntry | appTransferState:'blog-entry' | async; let blogEntry; else loading">
   <p>
     <b>Kevin Phelps, {{ blogEntry.date | date }}</b>
   </p>
@@ -15,6 +7,13 @@
     <p>{{ blogEntry.description }}</p>
   </blockquote>
 
-  <div [innerHTML]="trustedBody | async"></div>
+  <div [innerHTML]="blogEntry.body | appMarkdown | appSafeHtml"></div>
 </ng-container>
 
+<ng-container *ngIf="notFound | async">
+  <app-not-found></app-not-found>
+</ng-container>
+
+<ng-template #loading>
+  <app-loading *ngIf="(notFound | async) === false"></app-loading>
+</ng-template>
