@@ -1,0 +1,11 @@
+{
+  "extends": "./../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./../out-tsc/app-server",
+    "module": "esnext",
+    "target": "es2015",
+    "types": []
+  },
+  "files": ["main.prerender.ts"],
+  "include": ["src/**/*.d.ts"]
+}

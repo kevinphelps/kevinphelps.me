@@ -5,7 +5,7 @@ import * as path from 'path';
 import { readFile, writeFile } from './helpers/fs.helpers';
 
 const blogPath = './src/blog';
-const publicRootPath = './dist';
+const publicRootPath = './dist/browser';
 
 interface BlogEntryMetadata {
   title: string;

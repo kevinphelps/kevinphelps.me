@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "kevinphelps-me": {
+    "kevinphelps-me-browser": {
       "root": "./",
       "sourceRoot": "./src",
       "projectType": "application",
@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "aot": true,
-            "outputPath": "./dist",
+            "outputPath": "./dist/browser",
             "index": "./src/index.html",
             "main": "./src/main.ts",
             "polyfills": "./src/polyfills.ts",
@@ -83,7 +83,32 @@
           }
         }
       }
+    },
+    "kevinphelps-me-prerender": {
+      "root": "./",
+      "sourceRoot": "./src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "./dist/prerender",
+            "main": "./src/main.prerender.ts",
+            "tsConfig": "./src/tsconfig.prerender.json"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "./src/environments/environment.ts",
+                  "with": "./src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        }
+      }
     }
   },
-  "defaultProject": "kevinphelps-me"
+  "defaultProject": "kevinphelps-me-browser"
 }

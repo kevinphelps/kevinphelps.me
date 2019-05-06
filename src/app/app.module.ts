@@ -1,7 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import * as parseUrl from 'url-parse';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,13 +37,9 @@ const pipes = [MarkdownPipe, SafeHtmlPipe];
     BrowserModule.withServerTransition({ appId: 'kevinphelps-me' }),
     HttpClientModule,
     AppRoutingModule,
-    TransferStateModule.forRoot(isPrerendering)
+    TransferStateModule.forRoot()
   ],
   declarations: [...components, ...pipes],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
-
-export function isPrerendering() {
-  return parseUrl(window.location.href, true).query['prerendering'] === true.toString();
-}

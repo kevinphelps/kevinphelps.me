@@ -1,8 +1,9 @@
-import { ApplicationRef, APP_ID, APP_INITIALIZER, Inject, Injectable, Injector, Provider } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ApplicationRef, APP_ID, APP_INITIALIZER, Inject, Injectable, Injector, PlatformRef, Provider } from '@angular/core';
 import { EMPTY } from 'rxjs';
 import { filter, first, tap } from 'rxjs/operators';
 
-import { IsPrerenderingFunction, IS_PRERENDERING } from './transfer-state.tokens';
+import { environment } from './../../../environments/environment';
 
 interface State {
   [key: string]: any;
@@ -15,13 +16,13 @@ export class TransferStateService {
   constructor(
     private readonly applicationRef: ApplicationRef,
     @Inject(APP_ID) private readonly appId: string,
-    @Inject(IS_PRERENDERING) private readonly isPrerendering: IsPrerenderingFunction
+    @Inject(DOCUMENT) private readonly document: Document
   ) {
-    this.state = this.isPrerendering() ? {} : deserializeState(this.appId);
+    this.state = environment.node ? {} : this.deserializeState();
   }
 
   init() {
-    return this.isPrerendering() ? this.serializeStateWhenStable() : EMPTY;
+    return environment.node ? this.serializeStateWhenStable() : EMPTY;
   }
 
   get(key: string) {
@@ -37,17 +38,36 @@ export class TransferStateService {
       filter(isStable => isStable),
       first(),
       tap(() => {
-        serializeState(this.appId, this.state);
+        this.serializeState();
       })
     );
+  }
+
+  private serializeState() {
+    const script = this.document.createElement('script');
+    script.id = `${this.appId}-state`;
+    script.setAttribute('type', 'application/json');
+    script.textContent = escapeHtml(JSON.stringify(this.state));
+    this.document.body.appendChild(script);
+  }
+
+  private deserializeState() {
+    const script = this.document.getElementById(`${this.appId}-state`);
+
+    return script && script.textContent ? JSON.parse(unescapeHtml(script.textContent)) : {};
   }
 }
 
 export function transferStateServiceInitFactory(injector: Injector) {
   return () => {
+    const platformRef = injector.get(PlatformRef);
     const transferStateService = injector.get(TransferStateService);
 
-    transferStateService.init().subscribe();
+    const initSubscription = transferStateService.init().subscribe();
+
+    platformRef.onDestroy(() => {
+      initSubscription.unsubscribe();
+    });
   };
 }
 
@@ -57,20 +77,6 @@ export const transferStateServiceInitProvider: Provider = {
   deps: [Injector],
   multi: true
 };
-
-function serializeState(appId: string, state: State) {
-  const script = document.createElement('script');
-  script.id = `${appId}-state`;
-  script.setAttribute('type', 'application/json');
-  script.textContent = escapeHtml(JSON.stringify(state));
-  document.body.appendChild(script);
-}
-
-function deserializeState(appId: string) {
-  const script = document.getElementById(`${appId}-state`);
-
-  return script && script.textContent ? JSON.parse(unescapeHtml(script.textContent)) : {};
-}
 
 function escapeHtml(text: string): string {
   const escapedText: { [key: string]: string } = {

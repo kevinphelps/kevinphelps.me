@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist",
+    "public": "./dist/browser",
     "cleanUrls": true,
     "trailingSlash": false,
     "headers": [

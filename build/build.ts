@@ -53,17 +53,19 @@ async function build() {
   const configuration = options.prod ? 'production' : '';
   const ngOptions = ` --configuration ${configuration} ${options.watch ? '--watch' : ''}`;
 
-  const ngBuild = collapseSpaces(`ng build --no-delete-output-path ${ngOptions}`);
+  const ngBrowserBuild = collapseSpaces(`ng build --project kevinphelps-me-browser ${ngOptions}`);
+  const ngServerBuild = collapseSpaces(`ng build --project kevinphelps-me-prerender ${ngOptions}`);
   const blogBuild = 'ts-node ./build/build-blog.ts';
 
   if (options.watch) {
     const blogBuildWatch = `watch "${blogBuild}" ./src/blog`;
 
-    executeParallel(ngBuild, blogBuildWatch);
+    executeParallel(ngBrowserBuild, blogBuildWatch);
   } else {
-    await execute(ngBuild);
+    await execute(ngBrowserBuild);
+    await execute(ngServerBuild);
     await execute(blogBuild);
-    await execute('ts-node ./build/prerender.ts');
+    await execute('node ./dist/prerender/main.js');
   }
 }
 
