@@ -58,33 +58,33 @@ const options = parseFlags(process.argv.slice(2), defaultOptionsFn);
   }
 
   if (options.prettier && (!options.changed || changedHtmlFiles.length > 0)) {
-    const filesArg = options.changed ? changedHtmlFiles.join(' ') : '"./**/*.html"';
-    await runFormatter(`prettier --config ./prettier.json ${filesArg}`, '--write', '--list-different', options.fix);
+    const files = options.changed ? changedHtmlFiles : ['"./**/*.html"'];
+    await runPrettier(files, options.fix);
   }
 
   if (options.prettier && (!options.changed || changedJsonFiles.length > 0)) {
-    const filesArg = options.changed ? changedJsonFiles.join(' ') : '"./**/*.json"';
-    await runFormatter(`prettier --config ./prettier.json ${filesArg}`, '--write', '--list-different', options.fix);
+    const files = options.changed ? changedJsonFiles : ['"./**/*.json"'];
+    await runPrettier(files, options.fix);
   }
 
   if (options.prettier && (!options.changed || changedYmlFiles.length > 0)) {
-    const filesArg = options.changed ? changedYmlFiles.join(' ') : '"./**/*.yml"';
-    await runFormatter(`prettier --config ./prettier.json ${filesArg}`, '--write', '--list-different', options.fix);
+    const files = options.changed ? changedYmlFiles : ['"./**/*.yml"'];
+    await runPrettier(files, options.fix);
   }
 
   if (options.prettier && (!options.changed || changedScssFiles.length > 0)) {
-    const filesArg = options.changed ? changedScssFiles.join(' ') : '"./src/**/*.scss"';
-    await runFormatter(`prettier --config ./prettier.json ${filesArg}`, '--write', '--list-different', options.fix);
+    const files = options.changed ? changedScssFiles : ['"./src/**/*.scss"'];
+    await runPrettier(files, options.fix);
   }
 
   if (options.prettier && (!options.changed || changedTsFiles.length > 0)) {
-    const filesArg = options.changed ? changedTsFiles.join(' ') : './**/*.ts';
-    await runFormatter(`prettier --config ./prettier.json ${filesArg}`, '--write', '--list-different', options.fix);
+    const files = options.changed ? changedTsFiles : ['./**/*.ts'];
+    await runPrettier(files, options.fix);
   }
 
   if (options.prettier && (!options.changed || changedJsFiles.length > 0)) {
-    const filesArg = options.changed ? changedJsFiles.join(' ') : './**/*.js';
-    await runFormatter(`prettier --config ./prettier.json ${filesArg}`, '--write', '--list-different', options.fix);
+    const files = options.changed ? changedJsFiles : ['./**/*.js'];
+    await runPrettier(files, options.fix);
   }
 
   if (options.sasslint && (!options.changed || changedScssFiles.length > 0)) {
@@ -122,12 +122,14 @@ function splitLines(value: string) {
   return value.split(/\r?\n/).filter(line => line.length > 0);
 }
 
-async function runFormatter(command: string, writeArg: string, listDifferentArg: string, fix: boolean) {
+async function runPrettier(files: string[], fix: boolean) {
+  const basePrettierCommand = `prettier --config ./prettier.json ${files.join(' ')}`;
+
   if (fix) {
     do {
-      await execute(`${command} ${writeArg}`);
-    } while ((await execute(`${command} ${listDifferentArg}`, {}, false)).code !== 0);
+      await execute(`${basePrettierCommand} --write`);
+    } while ((await execute(`${basePrettierCommand} --list-different`, {}, false)).code !== 0);
   } else {
-    await execute(`${command} ${listDifferentArg}`);
+    await execute(`${basePrettierCommand} --list-different`);
   }
 }
