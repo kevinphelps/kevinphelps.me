@@ -11,7 +11,7 @@ import { BlogEntry, BlogService } from './../../shared/services/blog-service';
   templateUrl: './blog-entry.component.html'
 })
 export class BlogEntryComponent {
-  readonly blogEntry: Observable<BlogEntry>;
+  readonly blogEntry: Observable<BlogEntry | undefined>;
   readonly notFound = new BehaviorSubject(false);
 
   constructor(private readonly title: Title, private meta: Meta, private activatedRoute: ActivatedRoute, private blogService: BlogService) {
@@ -27,7 +27,7 @@ export class BlogEntryComponent {
     );
   }
 
-  private landOnBlogEntry(blogEntry: BlogEntry) {
+  private landOnBlogEntry(blogEntry: BlogEntry | undefined) {
     if (blogEntry !== undefined) {
       this.title.setTitle(blogEntry.title);
       this.meta.updateTag({ name: 'description', content: blogEntry.description });

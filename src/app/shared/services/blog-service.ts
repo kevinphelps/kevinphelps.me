@@ -22,6 +22,6 @@ export class BlogService {
   getBlogEntry(blogEntry: string) {
     return this.httpClient
       .get<BlogEntry>(`/blog/${blogEntry}.json`)
-      .pipe(catchError((response: Response) => (response.status === 404 ? of<BlogEntry>(undefined) : throwError(response))));
+      .pipe(catchError((response: Response) => (response.status === 404 ? of(undefined) : throwError(response))));
   }
 }

@@ -8,7 +8,7 @@ import { pageNotFoundTitle } from './../../shared/constants';
   templateUrl: './not-found.component.html'
 })
 export class NotFoundComponent implements OnInit, OnDestroy {
-  private originalTitle: string;
+  private originalTitle: string | undefined;
 
   constructor(private readonly title: Title) {}
 
@@ -18,6 +18,8 @@ export class NotFoundComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.title.setTitle(this.originalTitle);
+    if (this.originalTitle) {
+      this.title.setTitle(this.originalTitle);
+    }
   }
 }

@@ -31,14 +31,14 @@ const options = parseFlags(process.argv.slice(2), defaultOptionsFn);
 // tslint:disable-next-line:cyclomatic-complexity
 (async () => {
   const changedFiles = options.changed ? await getChangedFiles() : undefined;
-  const changedJsonFiles = options.changed ? changedFiles.filter(file => file.endsWith('.json')) : undefined;
-  const changedYmlFiles = options.changed ? changedFiles.filter(file => file.endsWith('.yml')) : undefined;
-  const changedTsFiles = options.changed ? changedFiles.filter(file => file.endsWith('.ts')) : undefined;
-  const changedJsFiles = options.changed ? changedFiles.filter(file => file.endsWith('.js')) : undefined;
-  const changedScssFiles = options.changed ? changedFiles.filter(file => file.endsWith('.scss')) : undefined;
-  const changedHtmlFiles = options.changed ? changedFiles.filter(file => file.endsWith('.html')) : undefined;
+  const changedJsonFiles = changedFiles ? changedFiles.filter(file => file.endsWith('.json')) : undefined;
+  const changedYmlFiles = changedFiles ? changedFiles.filter(file => file.endsWith('.yml')) : undefined;
+  const changedTsFiles = changedFiles ? changedFiles.filter(file => file.endsWith('.ts')) : undefined;
+  const changedJsFiles = changedFiles ? changedFiles.filter(file => file.endsWith('.js')) : undefined;
+  const changedScssFiles = changedFiles ? changedFiles.filter(file => file.endsWith('.scss')) : undefined;
+  const changedHtmlFiles = changedFiles ? changedFiles.filter(file => file.endsWith('.html')) : undefined;
 
-  if (options.changed) {
+  if (changedFiles) {
     console.log();
     console.log(chalk.yellow(options.lastCommit ? 'Linting changed files including the last commit:' : 'Linting changed files:'));
     console.log(chalk.yellow(changedFiles.map(file => `  ${file}`).join('\n')));
@@ -52,48 +52,48 @@ const options = parseFlags(process.argv.slice(2), defaultOptionsFn);
     }
   }
 
-  if (options.prelint && (!options.changed || changedFiles.length > 0)) {
-    const filesArg = options.changed ? changedFiles.join(' ') : '';
+  if (options.prelint && (!changedFiles || changedFiles.length > 0)) {
+    const filesArg = changedFiles ? changedFiles.join(' ') : '';
     await execute(`ts-node ./build/prelint.ts ${filesArg}`);
   }
 
-  if (options.prettier && (!options.changed || changedHtmlFiles.length > 0)) {
-    const files = options.changed ? changedHtmlFiles : ['"./**/*.html"'];
+  if (options.prettier && (!changedHtmlFiles || changedHtmlFiles.length > 0)) {
+    const files = changedHtmlFiles ? changedHtmlFiles : ['"./**/*.html"'];
     await runPrettier(files, options.fix);
   }
 
-  if (options.prettier && (!options.changed || changedJsonFiles.length > 0)) {
-    const files = options.changed ? changedJsonFiles : ['"./**/*.json"'];
+  if (options.prettier && (!changedJsonFiles || changedJsonFiles.length > 0)) {
+    const files = changedJsonFiles ? changedJsonFiles : ['"./**/*.json"'];
     await runPrettier(files, options.fix);
   }
 
-  if (options.prettier && (!options.changed || changedYmlFiles.length > 0)) {
-    const files = options.changed ? changedYmlFiles : ['"./**/*.yml"'];
+  if (options.prettier && (!changedYmlFiles || changedYmlFiles.length > 0)) {
+    const files = changedYmlFiles ? changedYmlFiles : ['"./**/*.yml"'];
     await runPrettier(files, options.fix);
   }
 
-  if (options.prettier && (!options.changed || changedScssFiles.length > 0)) {
-    const files = options.changed ? changedScssFiles : ['"./src/**/*.scss"'];
+  if (options.prettier && (!changedScssFiles || changedScssFiles.length > 0)) {
+    const files = changedScssFiles ? changedScssFiles : ['"./src/**/*.scss"'];
     await runPrettier(files, options.fix);
   }
 
-  if (options.prettier && (!options.changed || changedTsFiles.length > 0)) {
-    const files = options.changed ? changedTsFiles : ['./**/*.ts'];
+  if (options.prettier && (!changedTsFiles || changedTsFiles.length > 0)) {
+    const files = changedTsFiles ? changedTsFiles : ['./**/*.ts'];
     await runPrettier(files, options.fix);
   }
 
-  if (options.prettier && (!options.changed || changedJsFiles.length > 0)) {
-    const files = options.changed ? changedJsFiles : ['./**/*.js'];
+  if (options.prettier && (!changedJsFiles || changedJsFiles.length > 0)) {
+    const files = changedJsFiles ? changedJsFiles : ['./**/*.js'];
     await runPrettier(files, options.fix);
   }
 
-  if (options.sasslint && (!options.changed || changedScssFiles.length > 0)) {
-    const filesArg = options.changed ? changedScssFiles.join(' ') : '';
+  if (options.sasslint && (!changedScssFiles || changedScssFiles.length > 0)) {
+    const filesArg = changedScssFiles ? changedScssFiles.join(' ') : '';
     await execute(`sass-lint ${filesArg} -v -q --max-warnings 0`);
   }
 
-  if (options.tslint && (!options.changed || changedTsFiles.length > 0)) {
-    const filesArg = options.changed ? changedTsFiles.join(' ') : '';
+  if (options.tslint && (!changedTsFiles || changedTsFiles.length > 0)) {
+    const filesArg = changedTsFiles ? changedTsFiles.join(' ') : '';
     await execute(`tslint --project ./tsconfig.json ${options.fix ? '--fix' : ''} ${filesArg}`);
   }
 })();
