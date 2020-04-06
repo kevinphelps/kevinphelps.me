@@ -7,7 +7,6 @@ import { bail, bailIf, parseFlags } from './helpers/utility.helpers';
 
 interface Options {
   lint: boolean;
-  stats: boolean;
   watch: boolean;
   test: boolean;
   prod: boolean;
@@ -15,7 +14,6 @@ interface Options {
 
 const defaultOptionsFn = (args: Options) => ({
   lint: !args.watch,
-  stats: false,
   watch: false,
   test: false,
   prod: false
@@ -23,7 +21,6 @@ const defaultOptionsFn = (args: Options) => ({
 
 const options = parseFlags(process.argv.slice(2), defaultOptionsFn);
 
-bailIf(!options.prod && options.stats, '--stats is only useful for --prod builds.');
 bailIf(options.watch && options.prod, '--watch and --prod are mutually exclusive.');
 bailIf(options.watch && options.test, '--watch and --test are mutually exclusive.');
 
@@ -54,11 +51,7 @@ function clean() {
 
 async function build() {
   const configuration = options.prod ? 'production' : '';
-
-  const ngOptions =
-    ` --configuration ${configuration}` +
-    ` ${options.watch ? '--watch' : '--aot'}` +
-    ` ${options.stats ? '--stats-json' : '--no-stats-json'}`;
+  const ngOptions = ` --configuration ${configuration} ${options.watch ? '--watch' : '--aot'}`;
 
   const ngBuild = collapseSpaces(`ng build --no-delete-output-path ${ngOptions}`);
   const buildBlog = 'ts-node ./build/build-blog.ts';
