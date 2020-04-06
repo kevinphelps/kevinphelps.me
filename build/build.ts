@@ -57,8 +57,7 @@ async function build() {
 
   const ngOptions =
     ` --configuration ${configuration}` +
-    ` ${options.watch ? '--watch' : ''}` +
-    ` ${options.watch ? '' : '--aot'}` +
+    ` ${options.watch ? '--watch' : '--aot'}` +
     ` ${options.stats ? '--stats-json' : '--no-stats-json'}`;
 
   const ngBuild = collapseSpaces(`ng build --no-delete-output-path ${ngOptions}`);
