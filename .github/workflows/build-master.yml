@@ -1,0 +1,21 @@
+name: Build Master
+
+on:
+  push:
+    branches: master
+  pull_request:
+    branches: master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ckeckout code
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: yarn --pure-lockfile
+
+      - name: Build
+        run: yarn run build --prod
