@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 
 import { fileExists } from './helpers/fs.helpers';
 import { execute } from './helpers/shell.helpers';
