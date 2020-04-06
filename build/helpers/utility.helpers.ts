@@ -34,7 +34,7 @@ export function parseFlags<T extends { [key: string]: boolean }>(args: string[],
     }
   }
 
-  const argsMap = args.reduce<T>((options, arg) => {
+  const argsMap = args.reduce<{ [key: string]: boolean }>((options, arg) => {
     const key = arg
       .replace(/^--/, '')
       .replace('no-', '')
@@ -44,9 +44,9 @@ export function parseFlags<T extends { [key: string]: boolean }>(args: string[],
 
     options[key] = value;
     return options;
-  }, {} as any);
+  }, {});
 
-  const defaultOptions = defaultOptionsFn(argsMap);
+  const defaultOptions = defaultOptionsFn(argsMap as T);
   const validKeys = Object.keys(defaultOptions);
 
   for (const key of Object.keys(argsMap)) {

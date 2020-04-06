@@ -51,7 +51,7 @@ function clean() {
 
 async function build() {
   const configuration = options.prod ? 'production' : '';
-  const ngOptions = ` --configuration ${configuration} ${options.watch ? '--watch' : '--aot'}`;
+  const ngOptions = ` --configuration ${configuration} ${options.watch ? '--watch' : ''}`;
 
   const ngBuild = collapseSpaces(`ng build --no-delete-output-path ${ngOptions}`);
   const buildBlog = 'ts-node ./build/build-blog.ts';
