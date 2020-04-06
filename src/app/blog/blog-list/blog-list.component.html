@@ -1,5 +1,7 @@
-<div class="card margin-top" *ngFor="let blogEntry of blogList | appTransferState:'blog-list' | async">
+<div class="card margin-top" *ngFor="let blogEntry of blogList | appTransferState: 'blog-list' | async">
   {{ blogEntry.date | date }}
-  <h3><a [routerLink]="blogEntry.url">{{ blogEntry.title }}</a></h3>
+  <h3>
+    <a [routerLink]="blogEntry.url">{{ blogEntry.title }}</a>
+  </h3>
   <p>{{ blogEntry.description }}</p>
 </div>

@@ -36,9 +36,7 @@ const options = parseFlags(process.argv.slice(2), defaultOptionsFn);
   const changedTsFiles = options.changed ? changedFiles.filter(file => file.endsWith('.ts')) : undefined;
   const changedJsFiles = options.changed ? changedFiles.filter(file => file.endsWith('.js')) : undefined;
   const changedScssFiles = options.changed ? changedFiles.filter(file => file.endsWith('.scss')) : undefined;
-  const changedHtmlFiles = options.changed
-    ? changedFiles.filter(file => file.endsWith('.html') && !file.endsWith('index.html'))
-    : undefined;
+  const changedHtmlFiles = options.changed ? changedFiles.filter(file => file.endsWith('.html')) : undefined;
 
   if (options.changed) {
     console.log();
@@ -60,8 +58,8 @@ const options = parseFlags(process.argv.slice(2), defaultOptionsFn);
   }
 
   if (options.prettier && (!options.changed || changedHtmlFiles.length > 0)) {
-    const filesArg = options.changed ? changedHtmlFiles.join(' ') : '';
-    await runFormatter(`ts-node ./build/format-html.ts ${filesArg}`, '--fix', '--list', options.fix);
+    const filesArg = options.changed ? changedHtmlFiles.join(' ') : '"./**/*.html"';
+    await runFormatter(`prettier --config ./prettier.json ${filesArg}`, '--write', '--list-different', options.fix);
   }
 
   if (options.prettier && (!options.changed || changedJsonFiles.length > 0)) {

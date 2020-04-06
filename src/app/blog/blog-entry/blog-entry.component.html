@@ -1,4 +1,4 @@
-<ng-container *ngIf="blogEntry | appTransferState:'blog-entry' | async; let blogEntry; else loading">
+<ng-container *ngIf="blogEntry | appTransferState: 'blog-entry' | async; let blogEntry; else: loading">
   <p>
     <b>Kevin Phelps, {{ blogEntry.date | date }}</b>
   </p>
