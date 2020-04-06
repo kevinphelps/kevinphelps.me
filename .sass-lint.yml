@@ -19,6 +19,8 @@ rules:
   mixins-before-declarations: 1
 
   # Disallows
+  no-url-domains: 0
+  no-url-protocols: 0
   no-misspelled-properties: 0
   shorthand-values: 0
   no-vendor-prefixes: 0

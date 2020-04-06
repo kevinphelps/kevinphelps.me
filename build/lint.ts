@@ -90,8 +90,8 @@ const options = parseFlags(process.argv.slice(2), defaultOptionsFn);
   }
 
   if (options.sasslint && (!options.changed || changedScssFiles.length > 0)) {
-    // const filesArg = options.changed ? changedScssFiles.join(' ') : '';
-    // await execute(`sass-lint ${filesArg} -v -q --max-warnings 0`);
+    const filesArg = options.changed ? changedScssFiles.join(' ') : '';
+    await execute(`sass-lint ${filesArg} -v -q --max-warnings 0`);
   }
 
   if (options.tslint && (!options.changed || changedTsFiles.length > 0)) {
