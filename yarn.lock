@@ -10,7 +10,7 @@
     "@angular-devkit/core" "8.0.0-rc.2"
     rxjs "6.4.0"
 
-"@angular-devkit/build-angular@~0.800.0-rc.2":
+"@angular-devkit/build-angular@0.800.0-rc.2":
   version "0.800.0-rc.2"
   resolved "https://registry.yarnpkg.com/@angular-devkit/build-angular/-/build-angular-0.800.0-rc.2.tgz#df78a27a58813bc442629f8500e1f3d4fd72c519"
   integrity sha512-E6P3CO4IUEyCezrBuNwMZ+H/Rg+0R/FH3/TyWiivY5D3bLGvRFJbQE5ZQkVWbd1i1woxvHdqkjgco9hpOko2XQ==
@@ -2005,7 +2005,7 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
-codelyzer@^5.0.1:
+codelyzer@5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/codelyzer/-/codelyzer-5.0.1.tgz#c52a593368269b791594603968eb82cbecae3cda"
   integrity sha512-UVV76+/y1RwaxzCeGPFE3G4GFtfV42r3x8EmRd7XMNFLlLC0ewdtCqWTbvhwPQMxFZZ+OTLEOJNWfyPPn3QFWg==
@@ -9581,7 +9581,7 @@ zip-stream@^1.2.0:
     lodash "^4.8.0"
     readable-stream "^2.0.0"
 
-zone.js@~0.9.0:
+zone.js@0.9.1:
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.9.1.tgz#e37c6e5c54c13fae4de26b5ffe8d8e9212da6d9b"
   integrity sha512-GkPiJL8jifSrKReKaTZ5jkhrMEgXbXYC+IPo1iquBjayRa0q86w3Dipjn8b415jpitMExe9lV8iTsv8tk3DGag==
