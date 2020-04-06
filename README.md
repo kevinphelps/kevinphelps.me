@@ -1,2 +1,2 @@
 # kevinphelps.me
-[![Build Status](https://travis-ci.org/kevinphelps/kevinphelps.me.svg?branch=master)](https://travis-ci.org/kevinphelps/kevinphelps.me)
+![Build Status](https://github.com/kevinphelps/kevinphelps.me/workflows/build/badge.svg)
