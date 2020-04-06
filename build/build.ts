@@ -54,15 +54,15 @@ async function build() {
   const ngOptions = ` --configuration ${configuration} ${options.watch ? '--watch' : ''}`;
 
   const ngBuild = collapseSpaces(`ng build --no-delete-output-path ${ngOptions}`);
-  const buildBlog = 'ts-node ./build/build-blog.ts';
+  const blogBuild = 'ts-node ./build/build-blog.ts';
 
   if (options.watch) {
-    const buildBlogWatch = `watch "${buildBlog}" ./src/blog`;
+    const blogBuildWatch = `watch "${blogBuild}" ./src/blog`;
 
-    executeParallel(ngBuild, buildBlogWatch);
+    executeParallel(ngBuild, blogBuildWatch);
   } else {
     await execute(ngBuild);
-    await execute(buildBlog);
+    await execute(blogBuild);
     await execute('ts-node ./build/prerender.ts');
   }
 }
