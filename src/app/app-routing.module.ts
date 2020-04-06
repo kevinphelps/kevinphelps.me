@@ -16,7 +16,10 @@ export const routes: Routes = [
       {
         path: '',
         component: ProfileHeaderComponent,
-        children: [{ path: '', component: BlogListComponent }, { path: 'resume', component: ResumeComponent }]
+        children: [
+          { path: '', component: BlogListComponent },
+          { path: 'resume', component: ResumeComponent }
+        ]
       },
       { path: 'blog/:blogEntry', component: BlogEntryComponent },
       { path: '**', component: NotFoundComponent }

@@ -34,20 +34,17 @@ export function parseFlags<T extends { [key: string]: boolean }>(args: string[],
     }
   }
 
-  const argsMap = args.reduce<T>(
-    (options, arg) => {
-      const key = arg
-        .replace(/^--/, '')
-        .replace('no-', '')
-        .replace(/-([a-z])/g, match => match[1].toUpperCase());
+  const argsMap = args.reduce<T>((options, arg) => {
+    const key = arg
+      .replace(/^--/, '')
+      .replace('no-', '')
+      .replace(/-([a-z])/g, match => match[1].toUpperCase());
 
-      const value = arg.startsWith('--no-') === false;
+    const value = arg.startsWith('--no-') === false;
 
-      options[key] = value;
-      return options;
-    },
-    {} as any
-  );
+    options[key] = value;
+    return options;
+  }, {} as any);
 
   const defaultOptions = defaultOptionsFn(argsMap);
   const validKeys = Object.keys(defaultOptions);
