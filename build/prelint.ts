@@ -24,7 +24,7 @@ function getAllFilePaths() {
   const filePaths: string[] = [];
 
   walkDirectory('.', filePath => {
-    if (['dist', 'coverage', 'node_modules'].every(excluededFolder => !filePath.includes(excluededFolder))) {
+    if (['.git', 'dist', 'coverage', 'node_modules'].every(excluededFolder => !filePath.includes(excluededFolder))) {
       filePaths.push(filePath);
     }
   });
