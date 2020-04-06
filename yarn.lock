@@ -1328,10 +1328,10 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.123.tgz#39be5d211478c8dd3bdae98ee75bb7efe4abfe4d"
   integrity sha512-pQvPkc4Nltyx7G1Ww45OjVqUsJP4UsZm+GWJpigXgkikZqJgRm4c48g027o6tdgubWHwFRF15iFd+Y4Pmqv6+Q==
 
-"@types/marked@0.6.3":
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-0.6.3.tgz#f23cba5b04178a48b6ec67a866b17da4da4a6f0b"
-  integrity sha512-XEPk/AL0lR69XFGYng1R4a+vqDKLyeQSzgBZtAxHKpauaCx8eNSYCc6pBtYhx2rNyH15d1+vfeSjepcd3s1RLA==
+"@types/marked@0.7.3":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-0.7.3.tgz#3859f6fea52a2b73f42283018bd34b03f3c4fb3f"
+  integrity sha512-WXdEKuT3azHxLTThd5dwnpLt2Q9QiC8iKj09KZRtVqro3pX8hhY+GbD8FZOae6SBBEJ22yKJn3c7ejL0aucAcA==
 
 "@types/mime@*":
   version "2.0.1"
@@ -5546,10 +5546,10 @@ hex-color-regex@^1.1.0:
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
 
-highlight.js@9.15.6:
-  version "9.15.6"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.15.6.tgz#72d4d8d779ec066af9a17cb14360c3def0aa57c4"
-  integrity sha512-zozTAWM1D6sozHo8kqhfYgsac+B+q0PmsjXeyDrYIHHcBN0zTVT66+s2GW1GZv7DbyaROdLXKdabwS/WqPyIdQ==
+highlight.js@9.18.1:
+  version "9.18.1"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.18.1.tgz#ed21aa001fe6252bb10a3d76d47573c6539fe13c"
+  integrity sha512-OrVKYz70LHsnCgmbXctv/bfuvntIKDz177h0Co37DQ5jamGZLVmoCVMtjMtNZY3X9DrCcKfklHPNeA0uPZhSJg==
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
@@ -7258,10 +7258,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-marked@0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-0.6.2.tgz#c574be8b545a8b48641456ca1dbe0e37b6dccc1a"
-  integrity sha512-LqxwVH3P/rqKX4EKGz7+c2G9r98WeM/SW34ybhgNGhUQNKtf1GmmSkJ6cDGJ/t6tiyae49qRkpyTw2B9HOrgUA==
+marked@0.8.2:
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.8.2.tgz#4faad28d26ede351a7a1aaa5fec67915c869e355"
+  integrity sha512-EGwzEeCcLniFX51DhTpmTom+dSA/MG/OBUDjnWtHbEnjAH180VzUeAw+oE4+Zv+CoYBWyRlYOTR0N8SO9R1PVw==
 
 md5.js@^1.3.4:
   version "1.3.5"

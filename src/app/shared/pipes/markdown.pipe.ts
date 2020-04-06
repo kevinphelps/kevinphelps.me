@@ -14,7 +14,6 @@ export class MarkdownPipe implements PipeTransform {
 function renderMarkdownToHtml(markdown: string) {
   marked.setOptions({
     gfm: true,
-    tables: true,
     breaks: false,
     pedantic: false,
     sanitize: false,
