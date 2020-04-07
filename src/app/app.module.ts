@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +15,7 @@ import { LoadingComponent } from './shared/components/loading/loading.component'
 import { ProfileHeaderComponent } from './shared/components/profile-header/profile-header.component';
 import { MarkdownPipe } from './shared/pipes/markdown.pipe';
 import { SafeHtmlPipe } from './shared/pipes/safe-html.pipe';
-import { TransferStateModule } from './shared/transfer-state/transfer-state.module';
+import { TransferStatePipe } from './shared/pipes/transfer-state.pipe';
 
 const components = [
   AppComponent,
@@ -30,14 +30,14 @@ const components = [
   ResumeComponent
 ];
 
-const pipes = [MarkdownPipe, SafeHtmlPipe];
+const pipes = [MarkdownPipe, SafeHtmlPipe, TransferStatePipe];
 
 @NgModule({
   imports: [
     BrowserModule.withServerTransition({ appId: 'kevinphelps-me' }),
+    BrowserTransferStateModule,
     HttpClientModule,
-    AppRoutingModule,
-    TransferStateModule.forRoot()
+    AppRoutingModule
   ],
   declarations: [...components, ...pipes],
   bootstrap: [AppComponent]
