@@ -1,2 +1,2 @@
 # kevinphelps.me
-![Build Status](https://github.com/kevinphelps/kevinphelps.me/workflows/build/badge.svg)
+![Deploy Status](https://github.com/kevinphelps/kevinphelps.me/workflows/deploy/badge.svg)
